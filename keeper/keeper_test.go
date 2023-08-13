@@ -13,22 +13,22 @@ import (
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cosmosregistry/example"
-	"github.com/cosmosregistry/example/keeper"
+	"github.com/facundomedica/rps"
+	"github.com/facundomedica/rps/keeper"
 )
 
 type testFixture struct {
 	ctx         sdk.Context
 	k           keeper.Keeper
-	msgServer   example.MsgServer
-	queryServer example.QueryServer
+	msgServer   rps.MsgServer
+	queryServer rps.QueryServer
 
 	addrs []sdk.AccAddress
 }
 
 func initFixture(t *testing.T) *testFixture {
 	encCfg := moduletestutil.MakeTestEncodingConfig()
-	key := storetypes.NewKVStoreKey(example.ModuleName)
+	key := storetypes.NewKVStoreKey(rps.ModuleName)
 	testCtx := testutil.DefaultContextWithDB(t, key, storetypes.NewTransientStoreKey("transient_test"))
 	storeService := runtime.NewKVStoreService(key)
 	addrs := simtestutil.CreateIncrementalAccounts(3)

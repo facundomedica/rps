@@ -1,4 +1,4 @@
-package example
+package rps
 
 // DefaultParams returns default module parameters.
 func DefaultParams() Params {

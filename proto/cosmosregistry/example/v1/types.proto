@@ -1,9 +1,0 @@
-syntax = "proto3";
-package cosmosregistry.example.v1;
-
-option go_package = "github.com/cosmosregistry/example";
-
-import "amino/amino.proto";
-
-// Params defines the parameters of the module.
-message Params { option (amino.name) = "cosmosregistry/example/Params"; }

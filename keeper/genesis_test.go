@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"cosmossdk.io/core/genesis"
-	"github.com/cosmosregistry/example"
+	"github.com/facundomedica/rps"
 	"github.com/stretchr/testify/require"
 )
 
@@ -29,7 +29,7 @@ func TestDefaultGenesis(t *testing.T) {
 func TestExportGenesis(t *testing.T) {
 	fixture := initFixture(t)
 
-	_, err := fixture.msgServer.IncrementCounter(fixture.ctx, &example.MsgIncrementCounter{
+	_, err := fixture.msgServer.IncrementCounter(fixture.ctx, &rps.MsgIncrementCounter{
 		Sender: fixture.addrs[0].String(),
 	})
 	require.NoError(t, err)

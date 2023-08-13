@@ -11,8 +11,8 @@ import (
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/cosmosregistry/example"
-	"github.com/cosmosregistry/example/keeper"
+	"github.com/facundomedica/rps"
+	"github.com/facundomedica/rps/keeper"
 )
 
 // ConsensusVersion defines the current module consensus version.
@@ -37,24 +37,24 @@ func NewAppModuleBasic(m AppModule) module.AppModuleBasic {
 	return module.CoreAppModuleBasicAdaptor(m.Name(), m)
 }
 
-// Name returns the example module's name.
-func (AppModule) Name() string { return example.ModuleName }
+// Name returns the rps module's name.
+func (AppModule) Name() string { return rps.ModuleName }
 
-// RegisterLegacyAminoCodec registers the example module's types on the LegacyAmino codec.
+// RegisterLegacyAminoCodec registers the rps module's types on the LegacyAmino codec.
 func (AppModule) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
-	example.RegisterLegacyAminoCodec(cdc)
+	rps.RegisterLegacyAminoCodec(cdc)
 }
 
-// RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the example module.
+// RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the rps module.
 func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *gwruntime.ServeMux) {
-	if err := example.RegisterQueryHandlerClient(context.Background(), mux, example.NewQueryClient(clientCtx)); err != nil {
+	if err := rps.RegisterQueryHandlerClient(context.Background(), mux, rps.NewQueryClient(clientCtx)); err != nil {
 		panic(err)
 	}
 }
 
-// RegisterInterfaces registers interfaces and implementations of the example module.
+// RegisterInterfaces registers interfaces and implementations of the rps module.
 func (AppModule) RegisterInterfaces(registry codectypes.InterfaceRegistry) {
-	example.RegisterInterfaces(registry)
+	rps.RegisterInterfaces(registry)
 }
 
 // ConsensusVersion implements AppModule/ConsensusVersion.
@@ -62,12 +62,12 @@ func (AppModule) ConsensusVersion() uint64 { return ConsensusVersion }
 
 // RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries.
 func (am AppModule) RegisterServices(cfg module.Configurator) {
-	example.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
-	example.RegisterQueryServer(cfg.QueryServer(), keeper.NewQueryServerImpl(am.keeper))
+	rps.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
+	rps.RegisterQueryServer(cfg.QueryServer(), keeper.NewQueryServerImpl(am.keeper))
 
 	// Register in place module state migration migrations
 	// m := keeper.NewMigrator(am.keeper)
-	// if err := cfg.RegisterMigration(example.ModuleName, 1, m.Migrate1to2); err != nil {
-	// 	panic(fmt.Sprintf("failed to migrate x/%s from version 1 to 2: %v", example.ModuleName, err))
+	// if err := cfg.RegisterMigration(rps.ModuleName, 1, m.Migrate1to2); err != nil {
+	// 	panic(fmt.Sprintf("failed to migrate x/%s from version 1 to 2: %v", rps.ModuleName, err))
 	// }
 }

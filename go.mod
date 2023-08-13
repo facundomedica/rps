@@ -1,4 +1,4 @@
-module github.com/cosmosregistry/example
+module github.com/facundomedica/rps
 
 go 1.20
 

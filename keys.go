@@ -1,8 +1,8 @@
-package example
+package rps
 
 import "cosmossdk.io/collections"
 
-const ModuleName = "example"
+const ModuleName = "rps"
 
 var (
 	ParamsKey  = collections.NewPrefix(0)
