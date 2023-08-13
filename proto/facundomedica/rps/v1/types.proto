@@ -1,0 +1,9 @@
+syntax = "proto3";
+package facundomedica.rps.v1;
+
+option go_package = "github.com/facundomedica/rps";
+
+import "amino/amino.proto";
+
+// Params defines the parameters of the module.
+message Params { option (amino.name) = "facundomedica/rps/Params"; }
