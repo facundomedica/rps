@@ -2,11 +2,9 @@ package keeper
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"strings"
 
-	"cosmossdk.io/collections"
 	"github.com/facundomedica/rps"
 )
 
@@ -21,24 +19,19 @@ func NewMsgServerImpl(keeper Keeper) rps.MsgServer {
 	return &msgServer{k: keeper}
 }
 
-// IncrementCounter defines the handler for the MsgIncrementCounter message.
-func (ms msgServer) IncrementCounter(ctx context.Context, msg *rps.MsgIncrementCounter) (*rps.MsgIncrementCounterResponse, error) {
-	if _, err := ms.k.addressCodec.StringToBytes(msg.Sender); err != nil {
-		return nil, fmt.Errorf("invalid sender address: %w", err)
-	}
+// CommitMove implements rps.MsgServer.
+func (msgServer) CommitMove(context.Context, *rps.MsgCommitMove) (*rps.MsgCommitMoveResponse, error) {
+	panic("unimplemented")
+}
 
-	counter, err := ms.k.Counter.Get(ctx, msg.Sender)
-	if err != nil && !errors.Is(err, collections.ErrNotFound) {
-		return nil, err
-	}
+// NewGame implements rps.MsgServer.
+func (msgServer) NewGame(context.Context, *rps.MsgNewGame) (*rps.MsgNewGameResponse, error) {
+	panic("unimplemented")
+}
 
-	counter++
-
-	if err := ms.k.Counter.Set(ctx, msg.Sender, counter); err != nil {
-		return nil, err
-	}
-
-	return &rps.MsgIncrementCounterResponse{}, nil
+// RevealMove implements rps.MsgServer.
+func (msgServer) RevealMove(context.Context, *rps.MsgRevealMove) (*rps.MsgRevealMoveResponse, error) {
+	panic("unimplemented")
 }
 
 // UpdateParams params is defining the handler for the MsgUpdateParams message.

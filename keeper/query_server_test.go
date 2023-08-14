@@ -16,18 +16,18 @@ func TestQueryParams(t *testing.T) {
 	require.Equal(rps.Params{}, resp.Params)
 }
 
-func TestQueryCounter(t *testing.T) {
-	f := initFixture(t)
-	require := require.New(t)
+// func TestQueryCounter(t *testing.T) {
+// 	f := initFixture(t)
+// 	require := require.New(t)
 
-	resp, err := f.queryServer.Counter(f.ctx, &rps.QueryCounterRequest{Address: f.addrs[0].String()})
-	require.NoError(err)
-	require.Equal(uint64(0), resp.Counter)
+// 	resp, err := f.queryServer.Counter(f.ctx, &rps.QueryCounterRequest{Address: f.addrs[0].String()})
+// 	require.NoError(err)
+// 	require.Equal(uint64(0), resp.Counter)
 
-	_, err = f.msgServer.IncrementCounter(f.ctx, &rps.MsgIncrementCounter{Sender: f.addrs[0].String()})
-	require.NoError(err)
+// 	_, err = f.msgServer.IncrementCounter(f.ctx, &rps.MsgIncrementCounter{Sender: f.addrs[0].String()})
+// 	require.NoError(err)
 
-	resp, err = f.queryServer.Counter(f.ctx, &rps.QueryCounterRequest{Address: f.addrs[0].String()})
-	require.NoError(err)
-	require.Equal(uint64(1), resp.Counter)
-}
+// 	resp, err = f.queryServer.Counter(f.ctx, &rps.QueryCounterRequest{Address: f.addrs[0].String()})
+// 	require.NoError(err)
+// 	require.Equal(uint64(1), resp.Counter)
+// }

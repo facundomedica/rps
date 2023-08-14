@@ -11,11 +11,15 @@ import "gogoproto/gogo.proto";
 
 // Msg defines the module Msg service.
 service Query {
-  // Counter returns the current counter value.
-  rpc Counter(QueryCounterRequest) returns (QueryCounterResponse) {
+  rpc Games(QueryGamesRequest) returns (QueryGamesResponse) {
     option (cosmos.query.v1.module_query_safe) = true;
-    option (google.api.http).get =
-        "/facundomedica/rps/v1/counter/{address}";
+    option (google.api.http).get = "/facundomedica/rps/v1/games";
+  }
+
+  // Count returns the historical number of games played.
+  rpc Count(QueryCountRequest) returns (QueryCountResponse) {
+    option (cosmos.query.v1.module_query_safe) = true;
+    option (google.api.http).get = "/facundomedica/rps/v1/count";
   }
 
   // Params returns the module parameters.
@@ -24,18 +28,25 @@ service Query {
   }
 }
 
+// QueryGamesRequest is the request type for the Query/Games RPC method.
+// TODO: add pagination
+message QueryGamesRequest {}
+
+// QueryGamesResponse is the response type for the Query/Games RPC method.
+message QueryGamesResponse {
+  repeated Game games = 1
+      [ (gogoproto.nullable) = false, (amino.dont_omitempty) = true ];
+}
+
 // QueryCounterRequest is the request type for the Query/Counter RPC
 // method.
-message QueryCounterRequest {
-  // address defines the address to query for the counter.
-  string address = 1;
-}
+message QueryCountRequest {}
 
 // QueryCounterResponse is the response type for the Query/Counter RPC
 // method.
-message QueryCounterResponse {
-  // counter defines the current counter for the sender.
-  uint64 counter = 1;
+message QueryCountResponse {
+  // count is the amount of games played so far.
+  uint64 count = 1;
 }
 
 // QueryParamsRequest is the request type for the Query/Params RPC method.

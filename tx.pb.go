@@ -7,6 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	_ "github.com/cosmos/cosmos-proto"
+	types "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types/msgservice"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -31,24 +32,28 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// MsgIncrementCounter defines the Msg/IncrementCounter request type.
-type MsgIncrementCounter struct {
-	// sender is the message sender.
-	Sender string `protobuf:"bytes,1,opt,name=sender,proto3" json:"sender,omitempty"`
+type MsgNewGame struct {
+	Player string `protobuf:"bytes,1,opt,name=player,proto3" json:"player,omitempty"`
+	// commit is the hex encoded commitment to the first move.
+	// hex encoded sha256 of "salt:move" where move is one of "rock", "paper",
+	// "scissors"
+	Commit string `protobuf:"bytes,2,opt,name=commit,proto3" json:"commit,omitempty"`
+	// entry_fee is the amount to put into stake for the game.
+	EntryFee types.Coin `protobuf:"bytes,3,opt,name=entry_fee,json=entryFee,proto3" json:"entry_fee"`
 }
 
-func (m *MsgIncrementCounter) Reset()         { *m = MsgIncrementCounter{} }
-func (m *MsgIncrementCounter) String() string { return proto.CompactTextString(m) }
-func (*MsgIncrementCounter) ProtoMessage()    {}
-func (*MsgIncrementCounter) Descriptor() ([]byte, []int) {
+func (m *MsgNewGame) Reset()         { *m = MsgNewGame{} }
+func (m *MsgNewGame) String() string { return proto.CompactTextString(m) }
+func (*MsgNewGame) ProtoMessage()    {}
+func (*MsgNewGame) Descriptor() ([]byte, []int) {
 	return fileDescriptor_10e7630811a18157, []int{0}
 }
-func (m *MsgIncrementCounter) XXX_Unmarshal(b []byte) error {
+func (m *MsgNewGame) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgIncrementCounter) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgNewGame) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgIncrementCounter.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgNewGame.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -58,41 +63,56 @@ func (m *MsgIncrementCounter) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgIncrementCounter) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgIncrementCounter.Merge(m, src)
+func (m *MsgNewGame) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgNewGame.Merge(m, src)
 }
-func (m *MsgIncrementCounter) XXX_Size() int {
+func (m *MsgNewGame) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgIncrementCounter) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgIncrementCounter.DiscardUnknown(m)
+func (m *MsgNewGame) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgNewGame.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgIncrementCounter proto.InternalMessageInfo
+var xxx_messageInfo_MsgNewGame proto.InternalMessageInfo
 
-func (m *MsgIncrementCounter) GetSender() string {
+func (m *MsgNewGame) GetPlayer() string {
 	if m != nil {
-		return m.Sender
+		return m.Player
 	}
 	return ""
 }
 
-// MsgIncrementCounterResponse defines the Msg/IncrementCounter response type.
-type MsgIncrementCounterResponse struct {
+func (m *MsgNewGame) GetCommit() string {
+	if m != nil {
+		return m.Commit
+	}
+	return ""
 }
 
-func (m *MsgIncrementCounterResponse) Reset()         { *m = MsgIncrementCounterResponse{} }
-func (m *MsgIncrementCounterResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgIncrementCounterResponse) ProtoMessage()    {}
-func (*MsgIncrementCounterResponse) Descriptor() ([]byte, []int) {
+func (m *MsgNewGame) GetEntryFee() types.Coin {
+	if m != nil {
+		return m.EntryFee
+	}
+	return types.Coin{}
+}
+
+type MsgNewGameResponse struct {
+	// game_id is the ID of the created game.
+	GameId uint64 `protobuf:"varint,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+}
+
+func (m *MsgNewGameResponse) Reset()         { *m = MsgNewGameResponse{} }
+func (m *MsgNewGameResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgNewGameResponse) ProtoMessage()    {}
+func (*MsgNewGameResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_10e7630811a18157, []int{1}
 }
-func (m *MsgIncrementCounterResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgNewGameResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgIncrementCounterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgNewGameResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgIncrementCounterResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgNewGameResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -102,17 +122,232 @@ func (m *MsgIncrementCounterResponse) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgIncrementCounterResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgIncrementCounterResponse.Merge(m, src)
+func (m *MsgNewGameResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgNewGameResponse.Merge(m, src)
 }
-func (m *MsgIncrementCounterResponse) XXX_Size() int {
+func (m *MsgNewGameResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgIncrementCounterResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgIncrementCounterResponse.DiscardUnknown(m)
+func (m *MsgNewGameResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgNewGameResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgIncrementCounterResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgNewGameResponse proto.InternalMessageInfo
+
+func (m *MsgNewGameResponse) GetGameId() uint64 {
+	if m != nil {
+		return m.GameId
+	}
+	return 0
+}
+
+type MsgCommitMove struct {
+	Player string `protobuf:"bytes,1,opt,name=player,proto3" json:"player,omitempty"`
+	// game_id is the ID of the game to commit the move to.
+	GameId uint64 `protobuf:"varint,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	// commit is the hex encoded commitment to the move.
+	// SHA256("32byte-salt" + "move") where move is one of "rock", "paper",
+	// "scissors"
+	Commit string `protobuf:"bytes,3,opt,name=commit,proto3" json:"commit,omitempty"`
+}
+
+func (m *MsgCommitMove) Reset()         { *m = MsgCommitMove{} }
+func (m *MsgCommitMove) String() string { return proto.CompactTextString(m) }
+func (*MsgCommitMove) ProtoMessage()    {}
+func (*MsgCommitMove) Descriptor() ([]byte, []int) {
+	return fileDescriptor_10e7630811a18157, []int{2}
+}
+func (m *MsgCommitMove) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCommitMove) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCommitMove.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCommitMove) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCommitMove.Merge(m, src)
+}
+func (m *MsgCommitMove) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCommitMove) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCommitMove.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCommitMove proto.InternalMessageInfo
+
+func (m *MsgCommitMove) GetPlayer() string {
+	if m != nil {
+		return m.Player
+	}
+	return ""
+}
+
+func (m *MsgCommitMove) GetGameId() uint64 {
+	if m != nil {
+		return m.GameId
+	}
+	return 0
+}
+
+func (m *MsgCommitMove) GetCommit() string {
+	if m != nil {
+		return m.Commit
+	}
+	return ""
+}
+
+type MsgCommitMoveResponse struct {
+}
+
+func (m *MsgCommitMoveResponse) Reset()         { *m = MsgCommitMoveResponse{} }
+func (m *MsgCommitMoveResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgCommitMoveResponse) ProtoMessage()    {}
+func (*MsgCommitMoveResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_10e7630811a18157, []int{3}
+}
+func (m *MsgCommitMoveResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCommitMoveResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCommitMoveResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCommitMoveResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCommitMoveResponse.Merge(m, src)
+}
+func (m *MsgCommitMoveResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCommitMoveResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCommitMoveResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCommitMoveResponse proto.InternalMessageInfo
+
+type MsgRevealMove struct {
+	Player string `protobuf:"bytes,1,opt,name=player,proto3" json:"player,omitempty"`
+	// game_id is the ID of the game to reveal the move for.
+	GameId uint64 `protobuf:"varint,2,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	// move is the move to reveal.
+	// Must be one of "rock", "paper", "scissors"
+	Move string `protobuf:"bytes,3,opt,name=move,proto3" json:"move,omitempty"`
+	// salt is the salt used to create the commitment.
+	Salt string `protobuf:"bytes,4,opt,name=salt,proto3" json:"salt,omitempty"`
+}
+
+func (m *MsgRevealMove) Reset()         { *m = MsgRevealMove{} }
+func (m *MsgRevealMove) String() string { return proto.CompactTextString(m) }
+func (*MsgRevealMove) ProtoMessage()    {}
+func (*MsgRevealMove) Descriptor() ([]byte, []int) {
+	return fileDescriptor_10e7630811a18157, []int{4}
+}
+func (m *MsgRevealMove) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRevealMove) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRevealMove.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRevealMove) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRevealMove.Merge(m, src)
+}
+func (m *MsgRevealMove) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRevealMove) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRevealMove.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRevealMove proto.InternalMessageInfo
+
+func (m *MsgRevealMove) GetPlayer() string {
+	if m != nil {
+		return m.Player
+	}
+	return ""
+}
+
+func (m *MsgRevealMove) GetGameId() uint64 {
+	if m != nil {
+		return m.GameId
+	}
+	return 0
+}
+
+func (m *MsgRevealMove) GetMove() string {
+	if m != nil {
+		return m.Move
+	}
+	return ""
+}
+
+func (m *MsgRevealMove) GetSalt() string {
+	if m != nil {
+		return m.Salt
+	}
+	return ""
+}
+
+type MsgRevealMoveResponse struct {
+}
+
+func (m *MsgRevealMoveResponse) Reset()         { *m = MsgRevealMoveResponse{} }
+func (m *MsgRevealMoveResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgRevealMoveResponse) ProtoMessage()    {}
+func (*MsgRevealMoveResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_10e7630811a18157, []int{5}
+}
+func (m *MsgRevealMoveResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgRevealMoveResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgRevealMoveResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgRevealMoveResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgRevealMoveResponse.Merge(m, src)
+}
+func (m *MsgRevealMoveResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgRevealMoveResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgRevealMoveResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgRevealMoveResponse proto.InternalMessageInfo
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
 type MsgUpdateParams struct {
@@ -128,7 +363,7 @@ func (m *MsgUpdateParams) Reset()         { *m = MsgUpdateParams{} }
 func (m *MsgUpdateParams) String() string { return proto.CompactTextString(m) }
 func (*MsgUpdateParams) ProtoMessage()    {}
 func (*MsgUpdateParams) Descriptor() ([]byte, []int) {
-	return fileDescriptor_10e7630811a18157, []int{2}
+	return fileDescriptor_10e7630811a18157, []int{6}
 }
 func (m *MsgUpdateParams) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -180,7 +415,7 @@ func (m *MsgUpdateParamsResponse) Reset()         { *m = MsgUpdateParamsResponse
 func (m *MsgUpdateParamsResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgUpdateParamsResponse) ProtoMessage()    {}
 func (*MsgUpdateParamsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_10e7630811a18157, []int{3}
+	return fileDescriptor_10e7630811a18157, []int{7}
 }
 func (m *MsgUpdateParamsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -210,8 +445,12 @@ func (m *MsgUpdateParamsResponse) XXX_DiscardUnknown() {
 var xxx_messageInfo_MsgUpdateParamsResponse proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*MsgIncrementCounter)(nil), "facundomedica.rps.v1.MsgIncrementCounter")
-	proto.RegisterType((*MsgIncrementCounterResponse)(nil), "facundomedica.rps.v1.MsgIncrementCounterResponse")
+	proto.RegisterType((*MsgNewGame)(nil), "facundomedica.rps.v1.MsgNewGame")
+	proto.RegisterType((*MsgNewGameResponse)(nil), "facundomedica.rps.v1.MsgNewGameResponse")
+	proto.RegisterType((*MsgCommitMove)(nil), "facundomedica.rps.v1.MsgCommitMove")
+	proto.RegisterType((*MsgCommitMoveResponse)(nil), "facundomedica.rps.v1.MsgCommitMoveResponse")
+	proto.RegisterType((*MsgRevealMove)(nil), "facundomedica.rps.v1.MsgRevealMove")
+	proto.RegisterType((*MsgRevealMoveResponse)(nil), "facundomedica.rps.v1.MsgRevealMoveResponse")
 	proto.RegisterType((*MsgUpdateParams)(nil), "facundomedica.rps.v1.MsgUpdateParams")
 	proto.RegisterType((*MsgUpdateParamsResponse)(nil), "facundomedica.rps.v1.MsgUpdateParamsResponse")
 }
@@ -219,34 +458,46 @@ func init() {
 func init() { proto.RegisterFile("facundomedica/rps/v1/tx.proto", fileDescriptor_10e7630811a18157) }
 
 var fileDescriptor_10e7630811a18157 = []byte{
-	// 419 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0x3d, 0x8b, 0x13, 0x41,
-	0x18, 0xde, 0x51, 0x0c, 0x64, 0x14, 0xd4, 0x35, 0x78, 0xb9, 0xf5, 0x6e, 0x8d, 0x0b, 0x07, 0x67,
-	0xe0, 0x76, 0xc9, 0xa9, 0x29, 0xd2, 0x88, 0xb1, 0xb2, 0x08, 0xc8, 0x8a, 0x8d, 0x8d, 0x6c, 0x76,
-	0xc6, 0xc9, 0x16, 0xf3, 0xc1, 0xbc, 0xb3, 0xc1, 0x74, 0x62, 0x69, 0xe5, 0xcf, 0xb0, 0x4c, 0xe1,
-	0x0f, 0xb0, 0x4c, 0x19, 0xac, 0xac, 0x44, 0x12, 0x21, 0x7f, 0x43, 0xf6, 0x23, 0x24, 0x31, 0x7b,
-	0x90, 0x66, 0x99, 0xf7, 0x9d, 0x67, 0x9f, 0x2f, 0x06, 0x9f, 0x7e, 0x88, 0xe2, 0x54, 0x10, 0xc9,
-	0x29, 0x49, 0xe2, 0x28, 0xd0, 0x0a, 0x82, 0x71, 0x27, 0x30, 0x1f, 0x7d, 0xa5, 0xa5, 0x91, 0x76,
-	0x63, 0xe7, 0xda, 0xd7, 0x0a, 0xfc, 0x71, 0xc7, 0x39, 0x8a, 0x25, 0x70, 0x09, 0x01, 0x07, 0x96,
-	0xa1, 0x39, 0xb0, 0x02, 0xee, 0x34, 0x98, 0x64, 0x32, 0x3f, 0x06, 0xd9, 0xa9, 0xdc, 0xde, 0x8d,
-	0x78, 0x22, 0x64, 0x90, 0x7f, 0xcb, 0x55, 0xab, 0x5a, 0x76, 0xa2, 0x28, 0x94, 0x88, 0xe3, 0x42,
-	0xe3, 0x7d, 0xc1, 0x56, 0x0c, 0xc5, 0x95, 0x47, 0xf0, 0xbd, 0x01, 0xb0, 0x57, 0x22, 0xd6, 0x94,
-	0x53, 0x61, 0x5e, 0xca, 0x54, 0x18, 0xaa, 0xed, 0xfb, 0xb8, 0x06, 0x54, 0x10, 0xaa, 0x9b, 0xa8,
-	0x85, 0xce, 0xeb, 0x61, 0x39, 0xf5, 0x9e, 0x7d, 0x5e, 0x4d, 0xdb, 0xe5, 0xf0, 0x65, 0x35, 0x6d,
-	0x9f, 0xed, 0x6b, 0x57, 0xd0, 0x79, 0xa7, 0xf8, 0x41, 0xc5, 0x3a, 0xa4, 0xa0, 0xa4, 0x00, 0xea,
-	0xfd, 0x40, 0xf8, 0xf6, 0x00, 0xd8, 0x5b, 0x45, 0x22, 0x43, 0x5f, 0x47, 0x3a, 0xe2, 0x60, 0x77,
-	0x71, 0x3d, 0x4a, 0xcd, 0x48, 0xea, 0xc4, 0x4c, 0x0a, 0x13, 0xfd, 0xe6, 0xcf, 0xef, 0x17, 0x8d,
-	0xd2, 0xfd, 0x0b, 0x42, 0x34, 0x05, 0x78, 0x63, 0x74, 0x22, 0x58, 0xb8, 0x81, 0xda, 0xcf, 0x71,
-	0x4d, 0xe5, 0x0c, 0xcd, 0x6b, 0x2d, 0x74, 0x7e, 0xf3, 0xf2, 0xc4, 0xaf, 0xaa, 0xdd, 0x2f, 0x54,
-	0xfa, 0xf5, 0xd9, 0xef, 0x87, 0xd6, 0xb7, 0xd5, 0xb4, 0x8d, 0xc2, 0xf2, 0xb7, 0xde, 0xd3, 0x2c,
-	0xe2, 0x86, 0x30, 0x4b, 0xf9, 0xa8, 0x32, 0xe5, 0xb6, 0x5d, 0xef, 0x18, 0x1f, 0xfd, 0xb7, 0x5a,
-	0xa7, 0xbb, 0xfc, 0x8b, 0xf0, 0xf5, 0x01, 0x30, 0x5b, 0xe1, 0x3b, 0x7b, 0x3d, 0x3f, 0xae, 0x76,
-	0x57, 0x51, 0x96, 0xd3, 0x39, 0x18, 0xba, 0x56, 0xb6, 0x09, 0xbe, 0xb5, 0xd3, 0xe9, 0xd9, 0x95,
-	0x14, 0xdb, 0x30, 0xe7, 0xe2, 0x20, 0xd8, 0x5a, 0xc5, 0xb9, 0xf1, 0x29, 0xeb, 0xaf, 0xdf, 0x9d,
-	0x2d, 0x5c, 0x34, 0x5f, 0xb8, 0xe8, 0xcf, 0xc2, 0x45, 0x5f, 0x97, 0xae, 0x35, 0x5f, 0xba, 0xd6,
-	0xaf, 0xa5, 0x6b, 0xbd, 0x3b, 0x61, 0x89, 0x19, 0xa5, 0x43, 0x3f, 0x96, 0x3c, 0xd8, 0x6b, 0x72,
-	0x58, 0xcb, 0x1f, 0xe2, 0x93, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x26, 0x31, 0x6f, 0xfe, 0x3e,
-	0x03, 0x00, 0x00,
+	// 617 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0x41, 0x8f, 0xd2, 0x4c,
+	0x1c, 0xc6, 0xe9, 0xc2, 0xcb, 0xbe, 0xcc, 0x6a, 0x8c, 0xcd, 0x2a, 0x6c, 0x83, 0x5d, 0xac, 0x31,
+	0x21, 0x28, 0xad, 0xa0, 0xd9, 0x03, 0x31, 0x31, 0xb2, 0x89, 0xc6, 0x03, 0xc6, 0xd4, 0xec, 0xc5,
+	0x83, 0x64, 0x68, 0x67, 0xbb, 0x4d, 0x98, 0x4e, 0xd3, 0x19, 0xaa, 0xdc, 0x8c, 0x37, 0x3d, 0xf9,
+	0x1d, 0xbc, 0x78, 0x24, 0xd1, 0x0f, 0x60, 0x3c, 0xed, 0x71, 0xe3, 0xc9, 0x93, 0x31, 0x70, 0xe0,
+	0x6b, 0x98, 0x69, 0x87, 0x6d, 0x59, 0xc0, 0x25, 0xc6, 0x0b, 0x99, 0xf9, 0xcf, 0xf3, 0x7f, 0xe6,
+	0xf9, 0x75, 0x66, 0x00, 0xd7, 0x0e, 0xa1, 0x35, 0xf0, 0x6c, 0x82, 0x91, 0xed, 0x5a, 0xd0, 0x08,
+	0x7c, 0x6a, 0x84, 0x0d, 0x83, 0xbd, 0xd6, 0xfd, 0x80, 0x30, 0x22, 0x6f, 0xcf, 0x2d, 0xeb, 0x81,
+	0x4f, 0xf5, 0xb0, 0xa1, 0x14, 0x2d, 0x42, 0x31, 0xa1, 0x06, 0xa6, 0x0e, 0x57, 0x63, 0xea, 0xc4,
+	0x72, 0x45, 0x15, 0x0b, 0x3d, 0x48, 0x91, 0x11, 0x36, 0x7a, 0x88, 0xc1, 0x86, 0x61, 0x11, 0xd7,
+	0x13, 0xeb, 0xdb, 0x0e, 0x71, 0x48, 0x34, 0x34, 0xf8, 0x48, 0x54, 0x2f, 0x43, 0xec, 0x7a, 0xc4,
+	0x88, 0x7e, 0x45, 0xa9, 0xb2, 0x3c, 0xd6, 0xd0, 0x47, 0x54, 0x28, 0x76, 0xe2, 0xad, 0xba, 0xb1,
+	0x5b, 0x3c, 0x89, 0x97, 0xb4, 0x6f, 0x12, 0x00, 0x1d, 0xea, 0x3c, 0x45, 0xaf, 0x1e, 0x43, 0x8c,
+	0xe4, 0x3b, 0x20, 0xef, 0xf7, 0xe1, 0x10, 0x05, 0x25, 0xa9, 0x22, 0x55, 0x0b, 0xed, 0xd2, 0xf7,
+	0x2f, 0xf5, 0x6d, 0xd1, 0xf0, 0xd0, 0xb6, 0x03, 0x44, 0xe9, 0x73, 0x16, 0xb8, 0x9e, 0x63, 0x0a,
+	0x9d, 0x7c, 0x15, 0xe4, 0x2d, 0x82, 0xb1, 0xcb, 0x4a, 0x1b, 0xbc, 0xc3, 0x14, 0x33, 0xf9, 0x3e,
+	0x28, 0x20, 0x8f, 0x05, 0xc3, 0xee, 0x21, 0x42, 0xa5, 0x6c, 0x45, 0xaa, 0x6e, 0x35, 0x77, 0x74,
+	0xe1, 0xc4, 0x91, 0x75, 0x81, 0xac, 0xef, 0x13, 0xd7, 0x6b, 0xe7, 0x8e, 0x7f, 0xee, 0x66, 0xcc,
+	0xff, 0xa3, 0x8e, 0x47, 0x08, 0xb5, 0x6e, 0xbf, 0x9d, 0x8e, 0x6a, 0x62, 0x8b, 0xf7, 0xd3, 0x51,
+	0xad, 0xbc, 0xc8, 0x98, 0xa4, 0xd6, 0xea, 0x40, 0x4e, 0x66, 0x26, 0xa2, 0x3e, 0xf1, 0x28, 0x92,
+	0x8b, 0x60, 0xd3, 0x81, 0x18, 0x75, 0x5d, 0x3b, 0x82, 0xc9, 0x99, 0x79, 0x3e, 0x7d, 0x62, 0x6b,
+	0x1f, 0x25, 0x70, 0xb1, 0x43, 0x9d, 0xfd, 0x28, 0x68, 0x87, 0x84, 0x7f, 0x83, 0x9d, 0x32, 0xdf,
+	0x48, 0x9b, 0xa7, 0xbe, 0x47, 0x36, 0xfd, 0x3d, 0x5a, 0xc6, 0x19, 0xa2, 0xdd, 0xa5, 0x44, 0x49,
+	0x26, 0xad, 0x08, 0xae, 0xcc, 0x15, 0x66, 0x5c, 0xda, 0xe7, 0x38, 0xbe, 0x89, 0x42, 0x04, 0xfb,
+	0xff, 0x3a, 0xbe, 0x0c, 0x72, 0x98, 0x84, 0x48, 0x84, 0x8f, 0xc6, 0xbc, 0x46, 0x61, 0x9f, 0x95,
+	0x72, 0x71, 0x8d, 0x8f, 0xd7, 0xc4, 0x49, 0x32, 0x0a, 0x9c, 0xa4, 0x70, 0x8a, 0xf3, 0x55, 0x02,
+	0x97, 0x3a, 0xd4, 0x39, 0xf0, 0x6d, 0xc8, 0xd0, 0x33, 0x18, 0x40, 0x4c, 0xe5, 0x3d, 0x50, 0x80,
+	0x03, 0x76, 0x44, 0x02, 0x97, 0x0d, 0xcf, 0x65, 0x4a, 0xa4, 0xf2, 0x03, 0x90, 0xf7, 0x23, 0x87,
+	0x88, 0x6a, 0xab, 0x59, 0xd6, 0x97, 0xbd, 0x49, 0x3d, 0xde, 0xa5, 0x5d, 0xe0, 0x97, 0xee, 0xd3,
+	0x74, 0x54, 0x93, 0x4c, 0xd1, 0xd6, 0xba, 0xc7, 0xb1, 0x12, 0x43, 0x4e, 0x76, 0x7d, 0x29, 0x59,
+	0x3a, 0xae, 0xb6, 0x03, 0x8a, 0x67, 0x4a, 0x33, 0xba, 0xe6, 0xbb, 0x2c, 0xc8, 0x76, 0xa8, 0x23,
+	0x1f, 0x80, 0xcd, 0xd9, 0x1b, 0xab, 0x2c, 0x0f, 0x95, 0xdc, 0x60, 0xa5, 0x7a, 0x9e, 0xe2, 0xf4,
+	0x8e, 0xbf, 0x04, 0x20, 0x75, 0x8d, 0x6f, 0xac, 0xec, 0x4b, 0x44, 0xca, 0xad, 0x35, 0x44, 0x69,
+	0xff, 0xd4, 0x3d, 0x5b, 0xed, 0x9f, 0x88, 0xfe, 0xe0, 0xbf, 0x78, 0xf8, 0xb2, 0x0d, 0x2e, 0xcc,
+	0x1d, 0xfc, 0xcd, 0x95, 0xcd, 0x69, 0x99, 0x52, 0x5f, 0x4b, 0x36, 0xdb, 0x45, 0xf9, 0xef, 0x0d,
+	0x3f, 0xe4, 0xf6, 0xde, 0xf1, 0x58, 0x95, 0x4e, 0xc6, 0xaa, 0xf4, 0x6b, 0xac, 0x4a, 0x1f, 0x26,
+	0x6a, 0xe6, 0x64, 0xa2, 0x66, 0x7e, 0x4c, 0xd4, 0xcc, 0x8b, 0xb2, 0xe3, 0xb2, 0xa3, 0x41, 0x4f,
+	0xb7, 0x08, 0x36, 0x16, 0x8e, 0xbb, 0x97, 0x8f, 0xfe, 0x2a, 0xef, 0xfe, 0x0e, 0x00, 0x00, 0xff,
+	0xff, 0xab, 0x17, 0x23, 0xbf, 0x00, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -261,8 +512,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
-	// IncrementCounter increments the counter.
-	IncrementCounter(ctx context.Context, in *MsgIncrementCounter, opts ...grpc.CallOption) (*MsgIncrementCounterResponse, error)
+	NewGame(ctx context.Context, in *MsgNewGame, opts ...grpc.CallOption) (*MsgNewGameResponse, error)
+	CommitMove(ctx context.Context, in *MsgCommitMove, opts ...grpc.CallOption) (*MsgCommitMoveResponse, error)
+	RevealMove(ctx context.Context, in *MsgRevealMove, opts ...grpc.CallOption) (*MsgRevealMoveResponse, error)
 	// UpdateParams updates the module parameters.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 }
@@ -275,9 +527,27 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 	return &msgClient{cc}
 }
 
-func (c *msgClient) IncrementCounter(ctx context.Context, in *MsgIncrementCounter, opts ...grpc.CallOption) (*MsgIncrementCounterResponse, error) {
-	out := new(MsgIncrementCounterResponse)
-	err := c.cc.Invoke(ctx, "/facundomedica.rps.v1.Msg/IncrementCounter", in, out, opts...)
+func (c *msgClient) NewGame(ctx context.Context, in *MsgNewGame, opts ...grpc.CallOption) (*MsgNewGameResponse, error) {
+	out := new(MsgNewGameResponse)
+	err := c.cc.Invoke(ctx, "/facundomedica.rps.v1.Msg/NewGame", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) CommitMove(ctx context.Context, in *MsgCommitMove, opts ...grpc.CallOption) (*MsgCommitMoveResponse, error) {
+	out := new(MsgCommitMoveResponse)
+	err := c.cc.Invoke(ctx, "/facundomedica.rps.v1.Msg/CommitMove", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) RevealMove(ctx context.Context, in *MsgRevealMove, opts ...grpc.CallOption) (*MsgRevealMoveResponse, error) {
+	out := new(MsgRevealMoveResponse)
+	err := c.cc.Invoke(ctx, "/facundomedica.rps.v1.Msg/RevealMove", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -295,8 +565,9 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
-	// IncrementCounter increments the counter.
-	IncrementCounter(context.Context, *MsgIncrementCounter) (*MsgIncrementCounterResponse, error)
+	NewGame(context.Context, *MsgNewGame) (*MsgNewGameResponse, error)
+	CommitMove(context.Context, *MsgCommitMove) (*MsgCommitMoveResponse, error)
+	RevealMove(context.Context, *MsgRevealMove) (*MsgRevealMoveResponse, error)
 	// UpdateParams updates the module parameters.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 }
@@ -305,8 +576,14 @@ type MsgServer interface {
 type UnimplementedMsgServer struct {
 }
 
-func (*UnimplementedMsgServer) IncrementCounter(ctx context.Context, req *MsgIncrementCounter) (*MsgIncrementCounterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IncrementCounter not implemented")
+func (*UnimplementedMsgServer) NewGame(ctx context.Context, req *MsgNewGame) (*MsgNewGameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewGame not implemented")
+}
+func (*UnimplementedMsgServer) CommitMove(ctx context.Context, req *MsgCommitMove) (*MsgCommitMoveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommitMove not implemented")
+}
+func (*UnimplementedMsgServer) RevealMove(ctx context.Context, req *MsgRevealMove) (*MsgRevealMoveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RevealMove not implemented")
 }
 func (*UnimplementedMsgServer) UpdateParams(ctx context.Context, req *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
@@ -316,20 +593,56 @@ func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
 }
 
-func _Msg_IncrementCounter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgIncrementCounter)
+func _Msg_NewGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgNewGame)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).IncrementCounter(ctx, in)
+		return srv.(MsgServer).NewGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/facundomedica.rps.v1.Msg/IncrementCounter",
+		FullMethod: "/facundomedica.rps.v1.Msg/NewGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).IncrementCounter(ctx, req.(*MsgIncrementCounter))
+		return srv.(MsgServer).NewGame(ctx, req.(*MsgNewGame))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_CommitMove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCommitMove)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CommitMove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/facundomedica.rps.v1.Msg/CommitMove",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CommitMove(ctx, req.(*MsgCommitMove))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_RevealMove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRevealMove)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RevealMove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/facundomedica.rps.v1.Msg/RevealMove",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RevealMove(ctx, req.(*MsgRevealMove))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -357,8 +670,16 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "IncrementCounter",
-			Handler:    _Msg_IncrementCounter_Handler,
+			MethodName: "NewGame",
+			Handler:    _Msg_NewGame_Handler,
+		},
+		{
+			MethodName: "CommitMove",
+			Handler:    _Msg_CommitMove_Handler,
+		},
+		{
+			MethodName: "RevealMove",
+			Handler:    _Msg_RevealMove_Handler,
 		},
 		{
 			MethodName: "UpdateParams",
@@ -369,7 +690,7 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	Metadata: "facundomedica/rps/v1/tx.proto",
 }
 
-func (m *MsgIncrementCounter) Marshal() (dAtA []byte, err error) {
+func (m *MsgNewGame) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -379,27 +700,44 @@ func (m *MsgIncrementCounter) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgIncrementCounter) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgNewGame) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgIncrementCounter) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgNewGame) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Sender) > 0 {
-		i -= len(m.Sender)
-		copy(dAtA[i:], m.Sender)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Sender)))
+	{
+		size, err := m.EntryFee.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTx(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x1a
+	if len(m.Commit) > 0 {
+		i -= len(m.Commit)
+		copy(dAtA[i:], m.Commit)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Commit)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Player) > 0 {
+		i -= len(m.Player)
+		copy(dAtA[i:], m.Player)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Player)))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgIncrementCounterResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgNewGameResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -409,12 +747,154 @@ func (m *MsgIncrementCounterResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgIncrementCounterResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgNewGameResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgIncrementCounterResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgNewGameResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.GameId != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.GameId))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgCommitMove) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCommitMove) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCommitMove) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Commit) > 0 {
+		i -= len(m.Commit)
+		copy(dAtA[i:], m.Commit)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Commit)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.GameId != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.GameId))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.Player) > 0 {
+		i -= len(m.Player)
+		copy(dAtA[i:], m.Player)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Player)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgCommitMoveResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCommitMoveResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCommitMoveResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgRevealMove) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRevealMove) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRevealMove) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Salt) > 0 {
+		i -= len(m.Salt)
+		copy(dAtA[i:], m.Salt)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Salt)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Move) > 0 {
+		i -= len(m.Move)
+		copy(dAtA[i:], m.Move)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Move)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.GameId != 0 {
+		i = encodeVarintTx(dAtA, i, uint64(m.GameId))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.Player) > 0 {
+		i -= len(m.Player)
+		copy(dAtA[i:], m.Player)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Player)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgRevealMoveResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgRevealMoveResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgRevealMoveResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -496,20 +976,91 @@ func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *MsgIncrementCounter) Size() (n int) {
+func (m *MsgNewGame) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.Sender)
+	l = len(m.Player)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Commit)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = m.EntryFee.Size()
+	n += 1 + l + sovTx(uint64(l))
+	return n
+}
+
+func (m *MsgNewGameResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.GameId != 0 {
+		n += 1 + sovTx(uint64(m.GameId))
+	}
+	return n
+}
+
+func (m *MsgCommitMove) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Player)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.GameId != 0 {
+		n += 1 + sovTx(uint64(m.GameId))
+	}
+	l = len(m.Commit)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
 	return n
 }
 
-func (m *MsgIncrementCounterResponse) Size() (n int) {
+func (m *MsgCommitMoveResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgRevealMove) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Player)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if m.GameId != 0 {
+		n += 1 + sovTx(uint64(m.GameId))
+	}
+	l = len(m.Move)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Salt)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgRevealMoveResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -548,7 +1099,7 @@ func sovTx(x uint64) (n int) {
 func sozTx(x uint64) (n int) {
 	return sovTx(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *MsgIncrementCounter) Unmarshal(dAtA []byte) error {
+func (m *MsgNewGame) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -571,15 +1122,15 @@ func (m *MsgIncrementCounter) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgIncrementCounter: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgNewGame: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgIncrementCounter: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgNewGame: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Sender", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Player", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -607,7 +1158,72 @@ func (m *MsgIncrementCounter) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Sender = string(dAtA[iNdEx:postIndex])
+			m.Player = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Commit", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Commit = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EntryFee", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.EntryFee.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -630,7 +1246,7 @@ func (m *MsgIncrementCounter) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgIncrementCounterResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgNewGameResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -653,10 +1269,427 @@ func (m *MsgIncrementCounterResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgIncrementCounterResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgNewGameResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgIncrementCounterResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgNewGameResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GameId", wireType)
+			}
+			m.GameId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.GameId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCommitMove) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCommitMove: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCommitMove: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Player", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Player = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GameId", wireType)
+			}
+			m.GameId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.GameId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Commit", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Commit = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCommitMoveResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCommitMoveResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCommitMoveResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRevealMove) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRevealMove: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRevealMove: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Player", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Player = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GameId", wireType)
+			}
+			m.GameId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.GameId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Move", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Move = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Salt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Salt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgRevealMoveResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgRevealMoveResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgRevealMoveResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

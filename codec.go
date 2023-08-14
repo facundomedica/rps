@@ -12,14 +12,18 @@ import (
 // on the provided LegacyAmino codec. These types are used for Amino JSON serialization.
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	legacy.RegisterAminoMsg(cdc, &MsgUpdateParams{}, "rps/MsgUpdateParams")
-	legacy.RegisterAminoMsg(cdc, &MsgIncrementCounter{}, "rps/MsgIncrementCounter")
+	legacy.RegisterAminoMsg(cdc, &MsgNewGame{}, "rps/MsgNewGame")
+	legacy.RegisterAminoMsg(cdc, &MsgCommitMove{}, "rps/MsgCommitMove")
+	legacy.RegisterAminoMsg(cdc, &MsgRevealMove{}, "rps/MsgRevealMove")
 }
 
 // RegisterInterfaces registers the interfaces types with the interface registry.
 func RegisterInterfaces(registry types.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateParams{},
-		&MsgIncrementCounter{},
+		&MsgNewGame{},
+		&MsgCommitMove{},
+		&MsgRevealMove{},
 	)
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }

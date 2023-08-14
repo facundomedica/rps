@@ -19,16 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_IncrementCounter_FullMethodName = "/facundomedica.rps.v1.Msg/IncrementCounter"
-	Msg_UpdateParams_FullMethodName     = "/facundomedica.rps.v1.Msg/UpdateParams"
+	Msg_NewGame_FullMethodName      = "/facundomedica.rps.v1.Msg/NewGame"
+	Msg_CommitMove_FullMethodName   = "/facundomedica.rps.v1.Msg/CommitMove"
+	Msg_RevealMove_FullMethodName   = "/facundomedica.rps.v1.Msg/RevealMove"
+	Msg_UpdateParams_FullMethodName = "/facundomedica.rps.v1.Msg/UpdateParams"
 )
 
 // MsgClient is the client API for Msg service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MsgClient interface {
-	// IncrementCounter increments the counter.
-	IncrementCounter(ctx context.Context, in *MsgIncrementCounter, opts ...grpc.CallOption) (*MsgIncrementCounterResponse, error)
+	NewGame(ctx context.Context, in *MsgNewGame, opts ...grpc.CallOption) (*MsgNewGameResponse, error)
+	CommitMove(ctx context.Context, in *MsgCommitMove, opts ...grpc.CallOption) (*MsgCommitMoveResponse, error)
+	RevealMove(ctx context.Context, in *MsgRevealMove, opts ...grpc.CallOption) (*MsgRevealMoveResponse, error)
 	// UpdateParams updates the module parameters.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 }
@@ -41,9 +44,27 @@ func NewMsgClient(cc grpc.ClientConnInterface) MsgClient {
 	return &msgClient{cc}
 }
 
-func (c *msgClient) IncrementCounter(ctx context.Context, in *MsgIncrementCounter, opts ...grpc.CallOption) (*MsgIncrementCounterResponse, error) {
-	out := new(MsgIncrementCounterResponse)
-	err := c.cc.Invoke(ctx, Msg_IncrementCounter_FullMethodName, in, out, opts...)
+func (c *msgClient) NewGame(ctx context.Context, in *MsgNewGame, opts ...grpc.CallOption) (*MsgNewGameResponse, error) {
+	out := new(MsgNewGameResponse)
+	err := c.cc.Invoke(ctx, Msg_NewGame_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) CommitMove(ctx context.Context, in *MsgCommitMove, opts ...grpc.CallOption) (*MsgCommitMoveResponse, error) {
+	out := new(MsgCommitMoveResponse)
+	err := c.cc.Invoke(ctx, Msg_CommitMove_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) RevealMove(ctx context.Context, in *MsgRevealMove, opts ...grpc.CallOption) (*MsgRevealMoveResponse, error) {
+	out := new(MsgRevealMoveResponse)
+	err := c.cc.Invoke(ctx, Msg_RevealMove_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,8 +84,9 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
 type MsgServer interface {
-	// IncrementCounter increments the counter.
-	IncrementCounter(context.Context, *MsgIncrementCounter) (*MsgIncrementCounterResponse, error)
+	NewGame(context.Context, *MsgNewGame) (*MsgNewGameResponse, error)
+	CommitMove(context.Context, *MsgCommitMove) (*MsgCommitMoveResponse, error)
+	RevealMove(context.Context, *MsgRevealMove) (*MsgRevealMoveResponse, error)
 	// UpdateParams updates the module parameters.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	mustEmbedUnimplementedMsgServer()
@@ -74,8 +96,14 @@ type MsgServer interface {
 type UnimplementedMsgServer struct {
 }
 
-func (UnimplementedMsgServer) IncrementCounter(context.Context, *MsgIncrementCounter) (*MsgIncrementCounterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IncrementCounter not implemented")
+func (UnimplementedMsgServer) NewGame(context.Context, *MsgNewGame) (*MsgNewGameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewGame not implemented")
+}
+func (UnimplementedMsgServer) CommitMove(context.Context, *MsgCommitMove) (*MsgCommitMoveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommitMove not implemented")
+}
+func (UnimplementedMsgServer) RevealMove(context.Context, *MsgRevealMove) (*MsgRevealMoveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RevealMove not implemented")
 }
 func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
@@ -93,20 +121,56 @@ func RegisterMsgServer(s grpc.ServiceRegistrar, srv MsgServer) {
 	s.RegisterService(&Msg_ServiceDesc, srv)
 }
 
-func _Msg_IncrementCounter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgIncrementCounter)
+func _Msg_NewGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgNewGame)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).IncrementCounter(ctx, in)
+		return srv.(MsgServer).NewGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_IncrementCounter_FullMethodName,
+		FullMethod: Msg_NewGame_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).IncrementCounter(ctx, req.(*MsgIncrementCounter))
+		return srv.(MsgServer).NewGame(ctx, req.(*MsgNewGame))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_CommitMove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCommitMove)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CommitMove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CommitMove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CommitMove(ctx, req.(*MsgCommitMove))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_RevealMove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRevealMove)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RevealMove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_RevealMove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RevealMove(ctx, req.(*MsgRevealMove))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -137,8 +201,16 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "IncrementCounter",
-			Handler:    _Msg_IncrementCounter_Handler,
+			MethodName: "NewGame",
+			Handler:    _Msg_NewGame_Handler,
+		},
+		{
+			MethodName: "CommitMove",
+			Handler:    _Msg_CommitMove_Handler,
+		},
+		{
+			MethodName: "RevealMove",
+			Handler:    _Msg_RevealMove_Handler,
 		},
 		{
 			MethodName: "UpdateParams",

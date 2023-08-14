@@ -5,17 +5,24 @@ package rps
 
 import (
 	fmt "fmt"
+	_ "github.com/cosmos/cosmos-proto"
+	types "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
+	_ "github.com/cosmos/gogoproto/gogoproto"
 	proto "github.com/cosmos/gogoproto/proto"
+	github_com_cosmos_gogoproto_types "github.com/cosmos/gogoproto/types"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
+	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -25,6 +32,8 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // Params defines the parameters of the module.
 type Params struct {
+	CommitTimeout uint64 `protobuf:"varint,1,opt,name=commit_timeout,json=commitTimeout,proto3" json:"commit_timeout,omitempty"`
+	RevealTimeout uint64 `protobuf:"varint,2,opt,name=reveal_timeout,json=revealTimeout,proto3" json:"reveal_timeout,omitempty"`
 }
 
 func (m *Params) Reset()         { *m = Params{} }
@@ -60,24 +69,239 @@ func (m *Params) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Params proto.InternalMessageInfo
 
+func (m *Params) GetCommitTimeout() uint64 {
+	if m != nil {
+		return m.CommitTimeout
+	}
+	return 0
+}
+
+func (m *Params) GetRevealTimeout() uint64 {
+	if m != nil {
+		return m.RevealTimeout
+	}
+	return 0
+}
+
+type Game struct {
+	Id            uint64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	EntryFee      types.Coin `protobuf:"bytes,2,opt,name=entry_fee,json=entryFee,proto3" json:"entry_fee"`
+	CommitTimeout time.Time  `protobuf:"bytes,3,opt,name=commit_timeout,json=commitTimeout,proto3,stdtime" json:"commit_timeout"`
+	RevealTimeout time.Time  `protobuf:"bytes,4,opt,name=reveal_timeout,json=revealTimeout,proto3,stdtime" json:"reveal_timeout"`
+}
+
+func (m *Game) Reset()         { *m = Game{} }
+func (m *Game) String() string { return proto.CompactTextString(m) }
+func (*Game) ProtoMessage()    {}
+func (*Game) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ba9c952fdeac2baf, []int{1}
+}
+func (m *Game) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Game) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Game.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Game) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Game.Merge(m, src)
+}
+func (m *Game) XXX_Size() int {
+	return m.Size()
+}
+func (m *Game) XXX_DiscardUnknown() {
+	xxx_messageInfo_Game.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Game proto.InternalMessageInfo
+
+func (m *Game) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *Game) GetEntryFee() types.Coin {
+	if m != nil {
+		return m.EntryFee
+	}
+	return types.Coin{}
+}
+
+func (m *Game) GetCommitTimeout() time.Time {
+	if m != nil {
+		return m.CommitTimeout
+	}
+	return time.Time{}
+}
+
+func (m *Game) GetRevealTimeout() time.Time {
+	if m != nil {
+		return m.RevealTimeout
+	}
+	return time.Time{}
+}
+
+type MoveCommit struct {
+	Commit    string    `protobuf:"bytes,1,opt,name=commit,proto3" json:"commit,omitempty"`
+	CreatedAt time.Time `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at"`
+}
+
+func (m *MoveCommit) Reset()         { *m = MoveCommit{} }
+func (m *MoveCommit) String() string { return proto.CompactTextString(m) }
+func (*MoveCommit) ProtoMessage()    {}
+func (*MoveCommit) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ba9c952fdeac2baf, []int{2}
+}
+func (m *MoveCommit) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MoveCommit) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MoveCommit.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MoveCommit) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MoveCommit.Merge(m, src)
+}
+func (m *MoveCommit) XXX_Size() int {
+	return m.Size()
+}
+func (m *MoveCommit) XXX_DiscardUnknown() {
+	xxx_messageInfo_MoveCommit.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MoveCommit proto.InternalMessageInfo
+
+func (m *MoveCommit) GetCommit() string {
+	if m != nil {
+		return m.Commit
+	}
+	return ""
+}
+
+func (m *MoveCommit) GetCreatedAt() time.Time {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return time.Time{}
+}
+
+type MoveReveal struct {
+	Move      string    `protobuf:"bytes,1,opt,name=move,proto3" json:"move,omitempty"`
+	Salt      string    `protobuf:"bytes,2,opt,name=salt,proto3" json:"salt,omitempty"`
+	CreatedAt time.Time `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at"`
+}
+
+func (m *MoveReveal) Reset()         { *m = MoveReveal{} }
+func (m *MoveReveal) String() string { return proto.CompactTextString(m) }
+func (*MoveReveal) ProtoMessage()    {}
+func (*MoveReveal) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ba9c952fdeac2baf, []int{3}
+}
+func (m *MoveReveal) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MoveReveal) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MoveReveal.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MoveReveal) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MoveReveal.Merge(m, src)
+}
+func (m *MoveReveal) XXX_Size() int {
+	return m.Size()
+}
+func (m *MoveReveal) XXX_DiscardUnknown() {
+	xxx_messageInfo_MoveReveal.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MoveReveal proto.InternalMessageInfo
+
+func (m *MoveReveal) GetMove() string {
+	if m != nil {
+		return m.Move
+	}
+	return ""
+}
+
+func (m *MoveReveal) GetSalt() string {
+	if m != nil {
+		return m.Salt
+	}
+	return ""
+}
+
+func (m *MoveReveal) GetCreatedAt() time.Time {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return time.Time{}
+}
+
 func init() {
 	proto.RegisterType((*Params)(nil), "facundomedica.rps.v1.Params")
+	proto.RegisterType((*Game)(nil), "facundomedica.rps.v1.Game")
+	proto.RegisterType((*MoveCommit)(nil), "facundomedica.rps.v1.MoveCommit")
+	proto.RegisterType((*MoveReveal)(nil), "facundomedica.rps.v1.MoveReveal")
 }
 
 func init() { proto.RegisterFile("facundomedica/rps/v1/types.proto", fileDescriptor_ba9c952fdeac2baf) }
 
 var fileDescriptor_ba9c952fdeac2baf = []byte{
-	// 150 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x48, 0x4b, 0x4c, 0x2e,
-	0xcd, 0x4b, 0xc9, 0xcf, 0x4d, 0x4d, 0xc9, 0x4c, 0x4e, 0xd4, 0x2f, 0x2a, 0x28, 0xd6, 0x2f, 0x33,
-	0xd4, 0x2f, 0xa9, 0x2c, 0x48, 0x2d, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12, 0x41, 0x51,
-	0xa1, 0x57, 0x54, 0x50, 0xac, 0x57, 0x66, 0x28, 0x25, 0x98, 0x98, 0x9b, 0x99, 0x97, 0xaf, 0x0f,
-	0x26, 0x21, 0x0a, 0x95, 0xd4, 0xb9, 0xd8, 0x02, 0x12, 0x8b, 0x12, 0x73, 0x8b, 0xad, 0x64, 0xbb,
-	0x9e, 0x6f, 0xd0, 0x92, 0xc0, 0x34, 0x19, 0x22, 0xed, 0x64, 0x76, 0xe2, 0x91, 0x1c, 0xe3, 0x85,
-	0x47, 0x72, 0x8c, 0x0f, 0x1e, 0xc9, 0x31, 0x4e, 0x78, 0x2c, 0xc7, 0x70, 0xe1, 0xb1, 0x1c, 0xc3,
-	0x8d, 0xc7, 0x72, 0x0c, 0x51, 0x32, 0xe9, 0x99, 0x25, 0x19, 0xa5, 0x49, 0x7a, 0xc9, 0xf9, 0xb9,
-	0xfa, 0x18, 0xda, 0x93, 0xd8, 0xc0, 0xf6, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xc5, 0x44,
-	0x5b, 0x1a, 0xb4, 0x00, 0x00, 0x00,
+	// 442 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x52, 0x41, 0x6b, 0x13, 0x41,
+	0x14, 0xce, 0xc4, 0x25, 0x98, 0x91, 0x16, 0x1c, 0x8a, 0xb4, 0x41, 0x37, 0x25, 0x20, 0x48, 0x0f,
+	0x33, 0x44, 0xc1, 0x83, 0x78, 0x31, 0x05, 0xf5, 0x22, 0x84, 0xa5, 0x27, 0x2f, 0x61, 0x76, 0xf7,
+	0x65, 0x1d, 0xc8, 0xec, 0x5b, 0x76, 0x66, 0x17, 0x7a, 0xf1, 0x07, 0x78, 0xea, 0xcf, 0xf0, 0xd8,
+	0x9f, 0xd1, 0x63, 0x8f, 0x9e, 0x54, 0x92, 0x43, 0xff, 0x82, 0x47, 0xd9, 0x99, 0xa9, 0x10, 0x73,
+	0x52, 0x7a, 0x59, 0xde, 0xfb, 0xe6, 0x7b, 0xdf, 0x37, 0xef, 0xdb, 0xa1, 0xc7, 0x4b, 0x99, 0x35,
+	0x65, 0x8e, 0x1a, 0x72, 0x95, 0x49, 0x51, 0x57, 0x46, 0xb4, 0x53, 0x61, 0xcf, 0x2b, 0x30, 0xbc,
+	0xaa, 0xd1, 0x22, 0x3b, 0xd8, 0x62, 0xf0, 0xba, 0x32, 0xbc, 0x9d, 0x8e, 0x1e, 0x4a, 0xad, 0x4a,
+	0x14, 0xee, 0xeb, 0x89, 0xa3, 0x38, 0x43, 0xa3, 0xd1, 0x88, 0x54, 0x1a, 0x10, 0xed, 0x34, 0x05,
+	0x2b, 0xa7, 0x22, 0x43, 0x55, 0x86, 0xf3, 0x83, 0x02, 0x0b, 0x74, 0xa5, 0xe8, 0xaa, 0x80, 0x8e,
+	0x0b, 0xc4, 0x62, 0x05, 0xc2, 0x75, 0x69, 0xb3, 0x14, 0x56, 0x69, 0x30, 0x56, 0xea, 0x2a, 0x10,
+	0x8e, 0xbc, 0xec, 0xc2, 0x4f, 0xfa, 0xc6, 0x1f, 0x4d, 0x1a, 0x3a, 0x98, 0xcb, 0x5a, 0x6a, 0xc3,
+	0x9e, 0xd2, 0xfd, 0x0c, 0xb5, 0x56, 0x76, 0xd1, 0x8d, 0x63, 0x63, 0x0f, 0xc9, 0x31, 0x79, 0x16,
+	0x25, 0x7b, 0x1e, 0x3d, 0xf3, 0x60, 0x47, 0xab, 0xa1, 0x05, 0xb9, 0xfa, 0x43, 0xeb, 0x7b, 0x9a,
+	0x47, 0x03, 0xed, 0xd5, 0x93, 0x2f, 0x37, 0x97, 0x27, 0x87, 0xbb, 0xc9, 0x78, 0xb3, 0xc9, 0x2f,
+	0x42, 0xa3, 0x77, 0x52, 0x03, 0xdb, 0xa7, 0x7d, 0x95, 0x07, 0xa7, 0xbe, 0xca, 0xd9, 0x6b, 0x3a,
+	0x84, 0xd2, 0xd6, 0xe7, 0x8b, 0x25, 0x80, 0x53, 0x7e, 0xf0, 0xfc, 0x88, 0x87, 0x1b, 0x77, 0xa9,
+	0xf0, 0x90, 0x0a, 0x3f, 0x45, 0x55, 0xce, 0xa2, 0xab, 0xef, 0xe3, 0x5e, 0x72, 0xdf, 0x4d, 0xbc,
+	0x05, 0x60, 0xf3, 0x9d, 0x1d, 0xee, 0x39, 0x89, 0x11, 0xf7, 0x11, 0xf1, 0xdb, 0x88, 0xf8, 0xd9,
+	0x6d, 0x44, 0xb3, 0xbd, 0x4e, 0xe3, 0xe2, 0xc7, 0x98, 0x7c, 0xbd, 0xb9, 0x3c, 0x21, 0x7f, 0xaf,
+	0x3b, 0xdf, 0x59, 0x37, 0xfa, 0x67, 0xc5, 0xad, 0x64, 0x26, 0x25, 0xa5, 0x1f, 0xb0, 0x85, 0x53,
+	0x67, 0xc3, 0x1e, 0xd1, 0x81, 0x37, 0x74, 0x19, 0x0c, 0x93, 0xd0, 0xb1, 0xf7, 0x94, 0x66, 0x35,
+	0x48, 0x0b, 0xf9, 0x42, 0xfe, 0xc7, 0x16, 0xc3, 0x30, 0xfc, 0xc6, 0x4e, 0x3e, 0x7b, 0xbf, 0xc4,
+	0x5d, 0x82, 0x31, 0x1a, 0x69, 0x6c, 0x21, 0xb8, 0xb9, 0xba, 0xc3, 0x8c, 0x5c, 0xf9, 0x1f, 0x39,
+	0x4c, 0x5c, 0x7d, 0x77, 0xfe, 0xb3, 0x97, 0x57, 0xeb, 0x98, 0x5c, 0xaf, 0x63, 0xf2, 0x73, 0x1d,
+	0x93, 0x8b, 0x4d, 0xdc, 0xbb, 0xde, 0xc4, 0xbd, 0x6f, 0x9b, 0xb8, 0xf7, 0xf1, 0x71, 0xa1, 0xec,
+	0xa7, 0x26, 0xe5, 0x19, 0x6a, 0xb1, 0xf3, 0x52, 0xd2, 0x81, 0x73, 0x79, 0xf1, 0x3b, 0x00, 0x00,
+	0xff, 0xff, 0x55, 0x8d, 0x51, 0x4a, 0x5f, 0x03, 0x00, 0x00,
 }
 
 func (m *Params) Marshal() (dAtA []byte, err error) {
@@ -100,6 +324,153 @@ func (m *Params) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.RevealTimeout != 0 {
+		i = encodeVarintTypes(dAtA, i, uint64(m.RevealTimeout))
+		i--
+		dAtA[i] = 0x10
+	}
+	if m.CommitTimeout != 0 {
+		i = encodeVarintTypes(dAtA, i, uint64(m.CommitTimeout))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *Game) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Game) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Game) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	n1, err1 := github_com_cosmos_gogoproto_types.StdTimeMarshalTo(m.RevealTimeout, dAtA[i-github_com_cosmos_gogoproto_types.SizeOfStdTime(m.RevealTimeout):])
+	if err1 != nil {
+		return 0, err1
+	}
+	i -= n1
+	i = encodeVarintTypes(dAtA, i, uint64(n1))
+	i--
+	dAtA[i] = 0x22
+	n2, err2 := github_com_cosmos_gogoproto_types.StdTimeMarshalTo(m.CommitTimeout, dAtA[i-github_com_cosmos_gogoproto_types.SizeOfStdTime(m.CommitTimeout):])
+	if err2 != nil {
+		return 0, err2
+	}
+	i -= n2
+	i = encodeVarintTypes(dAtA, i, uint64(n2))
+	i--
+	dAtA[i] = 0x1a
+	{
+		size, err := m.EntryFee.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTypes(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x12
+	if m.Id != 0 {
+		i = encodeVarintTypes(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MoveCommit) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MoveCommit) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MoveCommit) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	n4, err4 := github_com_cosmos_gogoproto_types.StdTimeMarshalTo(m.CreatedAt, dAtA[i-github_com_cosmos_gogoproto_types.SizeOfStdTime(m.CreatedAt):])
+	if err4 != nil {
+		return 0, err4
+	}
+	i -= n4
+	i = encodeVarintTypes(dAtA, i, uint64(n4))
+	i--
+	dAtA[i] = 0x1a
+	if len(m.Commit) > 0 {
+		i -= len(m.Commit)
+		copy(dAtA[i:], m.Commit)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.Commit)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MoveReveal) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MoveReveal) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MoveReveal) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	n5, err5 := github_com_cosmos_gogoproto_types.StdTimeMarshalTo(m.CreatedAt, dAtA[i-github_com_cosmos_gogoproto_types.SizeOfStdTime(m.CreatedAt):])
+	if err5 != nil {
+		return 0, err5
+	}
+	i -= n5
+	i = encodeVarintTypes(dAtA, i, uint64(n5))
+	i--
+	dAtA[i] = 0x1a
+	if len(m.Salt) > 0 {
+		i -= len(m.Salt)
+		copy(dAtA[i:], m.Salt)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.Salt)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Move) > 0 {
+		i -= len(m.Move)
+		copy(dAtA[i:], m.Move)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.Move)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -120,6 +491,64 @@ func (m *Params) Size() (n int) {
 	}
 	var l int
 	_ = l
+	if m.CommitTimeout != 0 {
+		n += 1 + sovTypes(uint64(m.CommitTimeout))
+	}
+	if m.RevealTimeout != 0 {
+		n += 1 + sovTypes(uint64(m.RevealTimeout))
+	}
+	return n
+}
+
+func (m *Game) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovTypes(uint64(m.Id))
+	}
+	l = m.EntryFee.Size()
+	n += 1 + l + sovTypes(uint64(l))
+	l = github_com_cosmos_gogoproto_types.SizeOfStdTime(m.CommitTimeout)
+	n += 1 + l + sovTypes(uint64(l))
+	l = github_com_cosmos_gogoproto_types.SizeOfStdTime(m.RevealTimeout)
+	n += 1 + l + sovTypes(uint64(l))
+	return n
+}
+
+func (m *MoveCommit) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Commit)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = github_com_cosmos_gogoproto_types.SizeOfStdTime(m.CreatedAt)
+	n += 1 + l + sovTypes(uint64(l))
+	return n
+}
+
+func (m *MoveReveal) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Move)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.Salt)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = github_com_cosmos_gogoproto_types.SizeOfStdTime(m.CreatedAt)
+	n += 1 + l + sovTypes(uint64(l))
 	return n
 }
 
@@ -158,6 +587,474 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: Params: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CommitTimeout", wireType)
+			}
+			m.CommitTimeout = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CommitTimeout |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RevealTimeout", wireType)
+			}
+			m.RevealTimeout = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.RevealTimeout |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypes(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Game) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypes
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Game: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Game: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EntryFee", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.EntryFee.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CommitTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := github_com_cosmos_gogoproto_types.StdTimeUnmarshal(&m.CommitTimeout, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RevealTimeout", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := github_com_cosmos_gogoproto_types.StdTimeUnmarshal(&m.RevealTimeout, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypes(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MoveCommit) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypes
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MoveCommit: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MoveCommit: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Commit", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Commit = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := github_com_cosmos_gogoproto_types.StdTimeUnmarshal(&m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypes(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MoveReveal) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypes
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MoveReveal: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MoveReveal: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Move", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Move = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Salt", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Salt = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := github_com_cosmos_gogoproto_types.StdTimeUnmarshal(&m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTypes(dAtA[iNdEx:])

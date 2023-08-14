@@ -17,25 +17,23 @@ import (
 )
 
 var (
-	md_QueryCounterRequest         protoreflect.MessageDescriptor
-	fd_QueryCounterRequest_address protoreflect.FieldDescriptor
+	md_QueryGamesRequest protoreflect.MessageDescriptor
 )
 
 func init() {
 	file_facundomedica_rps_v1_query_proto_init()
-	md_QueryCounterRequest = File_facundomedica_rps_v1_query_proto.Messages().ByName("QueryCounterRequest")
-	fd_QueryCounterRequest_address = md_QueryCounterRequest.Fields().ByName("address")
+	md_QueryGamesRequest = File_facundomedica_rps_v1_query_proto.Messages().ByName("QueryGamesRequest")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryCounterRequest)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryGamesRequest)(nil)
 
-type fastReflection_QueryCounterRequest QueryCounterRequest
+type fastReflection_QueryGamesRequest QueryGamesRequest
 
-func (x *QueryCounterRequest) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryCounterRequest)(x)
+func (x *QueryGamesRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryGamesRequest)(x)
 }
 
-func (x *QueryCounterRequest) slowProtoReflect() protoreflect.Message {
+func (x *QueryGamesRequest) slowProtoReflect() protoreflect.Message {
 	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -47,43 +45,43 @@ func (x *QueryCounterRequest) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryCounterRequest_messageType fastReflection_QueryCounterRequest_messageType
-var _ protoreflect.MessageType = fastReflection_QueryCounterRequest_messageType{}
+var _fastReflection_QueryGamesRequest_messageType fastReflection_QueryGamesRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryGamesRequest_messageType{}
 
-type fastReflection_QueryCounterRequest_messageType struct{}
+type fastReflection_QueryGamesRequest_messageType struct{}
 
-func (x fastReflection_QueryCounterRequest_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryCounterRequest)(nil)
+func (x fastReflection_QueryGamesRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryGamesRequest)(nil)
 }
-func (x fastReflection_QueryCounterRequest_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterRequest)
+func (x fastReflection_QueryGamesRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryGamesRequest)
 }
-func (x fastReflection_QueryCounterRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterRequest
+func (x fastReflection_QueryGamesRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryGamesRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryCounterRequest) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterRequest
+func (x *fastReflection_QueryGamesRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryGamesRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryCounterRequest) Type() protoreflect.MessageType {
-	return _fastReflection_QueryCounterRequest_messageType
+func (x *fastReflection_QueryGamesRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryGamesRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryCounterRequest) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterRequest)
+func (x *fastReflection_QueryGamesRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryGamesRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryCounterRequest) Interface() protoreflect.ProtoMessage {
-	return (*QueryCounterRequest)(x)
+func (x *fastReflection_QueryGamesRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryGamesRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -91,13 +89,7 @@ func (x *fastReflection_QueryCounterRequest) Interface() protoreflect.ProtoMessa
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryCounterRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Address != "" {
-		value := protoreflect.ValueOfString(x.Address)
-		if !f(fd_QueryCounterRequest_address, value) {
-			return
-		}
-	}
+func (x *fastReflection_QueryGamesRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 }
 
 // Has reports whether a field is populated.
@@ -111,15 +103,13 @@ func (x *fastReflection_QueryCounterRequest) Range(f func(protoreflect.FieldDesc
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryCounterRequest) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryGamesRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterRequest.address":
-		return x.Address != ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -129,15 +119,13 @@ func (x *fastReflection_QueryCounterRequest) Has(fd protoreflect.FieldDescriptor
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryGamesRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterRequest.address":
-		x.Address = ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -147,16 +135,13 @@ func (x *fastReflection_QueryCounterRequest) Clear(fd protoreflect.FieldDescript
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryCounterRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryGamesRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "facundomedica.rps.v1.QueryCounterRequest.address":
-		value := x.Address
-		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterRequest does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -170,15 +155,13 @@ func (x *fastReflection_QueryCounterRequest) Get(descriptor protoreflect.FieldDe
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryGamesRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterRequest.address":
-		x.Address = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -192,40 +175,36 @@ func (x *fastReflection_QueryCounterRequest) Set(fd protoreflect.FieldDescriptor
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryGamesRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterRequest.address":
-		panic(fmt.Errorf("field address of message facundomedica.rps.v1.QueryCounterRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryCounterRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryGamesRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterRequest.address":
-		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryCounterRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryGamesRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in facundomedica.rps.v1.QueryCounterRequest", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in facundomedica.rps.v1.QueryGamesRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -233,7 +212,7 @@ func (x *fastReflection_QueryCounterRequest) WhichOneof(d protoreflect.OneofDesc
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryCounterRequest) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryGamesRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -244,7 +223,7 @@ func (x *fastReflection_QueryCounterRequest) GetUnknown() protoreflect.RawFields
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryGamesRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -256,7 +235,7 @@ func (x *fastReflection_QueryCounterRequest) SetUnknown(fields protoreflect.RawF
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryCounterRequest) IsValid() bool {
+func (x *fastReflection_QueryGamesRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -266,9 +245,9 @@ func (x *fastReflection_QueryCounterRequest) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryGamesRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryCounterRequest)
+		x := input.Message.Interface().(*QueryGamesRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -280,10 +259,6 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 		var n int
 		var l int
 		_ = l
-		l = len(x.Address)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -294,7 +269,7 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterRequest)
+		x := input.Message.Interface().(*QueryGamesRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -313,13 +288,6 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Address) > 0 {
-			i -= len(x.Address)
-			copy(dAtA[i:], x.Address)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Address)))
-			i--
-			dAtA[i] = 0xa
-		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
 		} else {
@@ -331,7 +299,7 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterRequest)
+		x := input.Message.Interface().(*QueryGamesRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -363,17 +331,477 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterRequest: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGamesRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGamesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var _ protoreflect.List = (*_QueryGamesResponse_1_list)(nil)
+
+type _QueryGamesResponse_1_list struct {
+	list *[]*Game
+}
+
+func (x *_QueryGamesResponse_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_QueryGamesResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_QueryGamesResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Game)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_QueryGamesResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Game)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_QueryGamesResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(Game)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryGamesResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_QueryGamesResponse_1_list) NewElement() protoreflect.Value {
+	v := new(Game)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryGamesResponse_1_list) IsValid() bool {
+	return x.list != nil
+}
+
+var (
+	md_QueryGamesResponse       protoreflect.MessageDescriptor
+	fd_QueryGamesResponse_games protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_facundomedica_rps_v1_query_proto_init()
+	md_QueryGamesResponse = File_facundomedica_rps_v1_query_proto.Messages().ByName("QueryGamesResponse")
+	fd_QueryGamesResponse_games = md_QueryGamesResponse.Fields().ByName("games")
+}
+
+var _ protoreflect.Message = (*fastReflection_QueryGamesResponse)(nil)
+
+type fastReflection_QueryGamesResponse QueryGamesResponse
+
+func (x *QueryGamesResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryGamesResponse)(x)
+}
+
+func (x *QueryGamesResponse) slowProtoReflect() protoreflect.Message {
+	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_QueryGamesResponse_messageType fastReflection_QueryGamesResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryGamesResponse_messageType{}
+
+type fastReflection_QueryGamesResponse_messageType struct{}
+
+func (x fastReflection_QueryGamesResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryGamesResponse)(nil)
+}
+func (x fastReflection_QueryGamesResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryGamesResponse)
+}
+func (x fastReflection_QueryGamesResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryGamesResponse
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_QueryGamesResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryGamesResponse
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_QueryGamesResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryGamesResponse_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_QueryGamesResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryGamesResponse)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_QueryGamesResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryGamesResponse)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_QueryGamesResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.Games) != 0 {
+		value := protoreflect.ValueOfList(&_QueryGamesResponse_1_list{list: &x.Games})
+		if !f(fd_QueryGamesResponse_games, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_QueryGamesResponse) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryGamesResponse.games":
+		return len(x.Games) != 0
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryGamesResponse) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryGamesResponse.games":
+		x.Games = nil
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_QueryGamesResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "facundomedica.rps.v1.QueryGamesResponse.games":
+		if len(x.Games) == 0 {
+			return protoreflect.ValueOfList(&_QueryGamesResponse_1_list{})
+		}
+		listValue := &_QueryGamesResponse_1_list{list: &x.Games}
+		return protoreflect.ValueOfList(listValue)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesResponse does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryGamesResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryGamesResponse.games":
+		lv := value.List()
+		clv := lv.(*_QueryGamesResponse_1_list)
+		x.Games = *clv.list
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryGamesResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryGamesResponse.games":
+		if x.Games == nil {
+			x.Games = []*Game{}
+		}
+		value := &_QueryGamesResponse_1_list{list: &x.Games}
+		return protoreflect.ValueOfList(value)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_QueryGamesResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryGamesResponse.games":
+		list := []*Game{}
+		return protoreflect.ValueOfList(&_QueryGamesResponse_1_list{list: &list})
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryGamesResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryGamesResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_QueryGamesResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in facundomedica.rps.v1.QueryGamesResponse", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_QueryGamesResponse) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryGamesResponse) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_QueryGamesResponse) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_QueryGamesResponse) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*QueryGamesResponse)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if len(x.Games) > 0 {
+			for _, e := range x.Games {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*QueryGamesResponse)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.Games) > 0 {
+			for iNdEx := len(x.Games) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Games[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*QueryGamesResponse)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGamesResponse: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryGamesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Games", wireType)
 				}
-				var stringLen uint64
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -383,23 +811,25 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
+				if msglen < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
-				postIndex := iNdEx + intStringLen
+				postIndex := iNdEx + msglen
 				if postIndex < 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
 				}
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Address = string(dAtA[iNdEx:postIndex])
+				x.Games = append(x.Games, &Game{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Games[len(x.Games)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -437,26 +867,24 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_QueryCounterResponse         protoreflect.MessageDescriptor
-	fd_QueryCounterResponse_counter protoreflect.FieldDescriptor
+	md_QueryCountRequest protoreflect.MessageDescriptor
 )
 
 func init() {
 	file_facundomedica_rps_v1_query_proto_init()
-	md_QueryCounterResponse = File_facundomedica_rps_v1_query_proto.Messages().ByName("QueryCounterResponse")
-	fd_QueryCounterResponse_counter = md_QueryCounterResponse.Fields().ByName("counter")
+	md_QueryCountRequest = File_facundomedica_rps_v1_query_proto.Messages().ByName("QueryCountRequest")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryCounterResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryCountRequest)(nil)
 
-type fastReflection_QueryCounterResponse QueryCounterResponse
+type fastReflection_QueryCountRequest QueryCountRequest
 
-func (x *QueryCounterResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryCounterResponse)(x)
+func (x *QueryCountRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryCountRequest)(x)
 }
 
-func (x *QueryCounterResponse) slowProtoReflect() protoreflect.Message {
-	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[1]
+func (x *QueryCountRequest) slowProtoReflect() protoreflect.Message {
+	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -467,43 +895,43 @@ func (x *QueryCounterResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryCounterResponse_messageType fastReflection_QueryCounterResponse_messageType
-var _ protoreflect.MessageType = fastReflection_QueryCounterResponse_messageType{}
+var _fastReflection_QueryCountRequest_messageType fastReflection_QueryCountRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryCountRequest_messageType{}
 
-type fastReflection_QueryCounterResponse_messageType struct{}
+type fastReflection_QueryCountRequest_messageType struct{}
 
-func (x fastReflection_QueryCounterResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryCounterResponse)(nil)
+func (x fastReflection_QueryCountRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryCountRequest)(nil)
 }
-func (x fastReflection_QueryCounterResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterResponse)
+func (x fastReflection_QueryCountRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryCountRequest)
 }
-func (x fastReflection_QueryCounterResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterResponse
+func (x fastReflection_QueryCountRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCountRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryCounterResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterResponse
+func (x *fastReflection_QueryCountRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCountRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryCounterResponse) Type() protoreflect.MessageType {
-	return _fastReflection_QueryCounterResponse_messageType
+func (x *fastReflection_QueryCountRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryCountRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryCounterResponse) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterResponse)
+func (x *fastReflection_QueryCountRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryCountRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryCounterResponse) Interface() protoreflect.ProtoMessage {
-	return (*QueryCounterResponse)(x)
+func (x *fastReflection_QueryCountRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryCountRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -511,13 +939,7 @@ func (x *fastReflection_QueryCounterResponse) Interface() protoreflect.ProtoMess
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryCounterResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Counter != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.Counter)
-		if !f(fd_QueryCounterResponse_counter, value) {
-			return
-		}
-	}
+func (x *fastReflection_QueryCountRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 }
 
 // Has reports whether a field is populated.
@@ -531,15 +953,13 @@ func (x *fastReflection_QueryCounterResponse) Range(f func(protoreflect.FieldDes
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryCounterResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryCountRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterResponse.counter":
-		return x.Counter != uint64(0)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -549,15 +969,13 @@ func (x *fastReflection_QueryCounterResponse) Has(fd protoreflect.FieldDescripto
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryCountRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterResponse.counter":
-		x.Counter = uint64(0)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -567,16 +985,13 @@ func (x *fastReflection_QueryCounterResponse) Clear(fd protoreflect.FieldDescrip
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryCounterResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCountRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "facundomedica.rps.v1.QueryCounterResponse.counter":
-		value := x.Counter
-		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -590,15 +1005,13 @@ func (x *fastReflection_QueryCounterResponse) Get(descriptor protoreflect.FieldD
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryCountRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterResponse.counter":
-		x.Counter = value.Uint()
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -612,40 +1025,36 @@ func (x *fastReflection_QueryCounterResponse) Set(fd protoreflect.FieldDescripto
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCountRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterResponse.counter":
-		panic(fmt.Errorf("field counter of message facundomedica.rps.v1.QueryCounterResponse is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryCounterResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCountRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "facundomedica.rps.v1.QueryCounterResponse.counter":
-		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountRequest"))
 		}
-		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryCounterResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryCountRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in facundomedica.rps.v1.QueryCounterResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in facundomedica.rps.v1.QueryCountRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -653,7 +1062,7 @@ func (x *fastReflection_QueryCounterResponse) WhichOneof(d protoreflect.OneofDes
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryCounterResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryCountRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -664,7 +1073,7 @@ func (x *fastReflection_QueryCounterResponse) GetUnknown() protoreflect.RawField
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryCountRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -676,7 +1085,7 @@ func (x *fastReflection_QueryCounterResponse) SetUnknown(fields protoreflect.Raw
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryCounterResponse) IsValid() bool {
+func (x *fastReflection_QueryCountRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -686,9 +1095,9 @@ func (x *fastReflection_QueryCounterResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryCountRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryCounterResponse)
+		x := input.Message.Interface().(*QueryCountRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -700,9 +1109,6 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 		var n int
 		var l int
 		_ = l
-		if x.Counter != 0 {
-			n += 1 + runtime.Sov(uint64(x.Counter))
-		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -713,7 +1119,7 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterResponse)
+		x := input.Message.Interface().(*QueryCountRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -732,11 +1138,6 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.Counter != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Counter))
-			i--
-			dAtA[i] = 0x8
-		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
 		} else {
@@ -748,7 +1149,7 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterResponse)
+		x := input.Message.Interface().(*QueryCountRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -780,17 +1181,402 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_QueryCountResponse       protoreflect.MessageDescriptor
+	fd_QueryCountResponse_count protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_facundomedica_rps_v1_query_proto_init()
+	md_QueryCountResponse = File_facundomedica_rps_v1_query_proto.Messages().ByName("QueryCountResponse")
+	fd_QueryCountResponse_count = md_QueryCountResponse.Fields().ByName("count")
+}
+
+var _ protoreflect.Message = (*fastReflection_QueryCountResponse)(nil)
+
+type fastReflection_QueryCountResponse QueryCountResponse
+
+func (x *QueryCountResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryCountResponse)(x)
+}
+
+func (x *QueryCountResponse) slowProtoReflect() protoreflect.Message {
+	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_QueryCountResponse_messageType fastReflection_QueryCountResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryCountResponse_messageType{}
+
+type fastReflection_QueryCountResponse_messageType struct{}
+
+func (x fastReflection_QueryCountResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryCountResponse)(nil)
+}
+func (x fastReflection_QueryCountResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryCountResponse)
+}
+func (x fastReflection_QueryCountResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCountResponse
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_QueryCountResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCountResponse
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_QueryCountResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryCountResponse_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_QueryCountResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryCountResponse)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_QueryCountResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryCountResponse)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_QueryCountResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Count != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Count)
+		if !f(fd_QueryCountResponse_count, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_QueryCountResponse) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryCountResponse.count":
+		return x.Count != uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryCountResponse) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryCountResponse.count":
+		x.Count = uint64(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_QueryCountResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "facundomedica.rps.v1.QueryCountResponse.count":
+		value := x.Count
+		return protoreflect.ValueOfUint64(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountResponse does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryCountResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryCountResponse.count":
+		x.Count = value.Uint()
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryCountResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryCountResponse.count":
+		panic(fmt.Errorf("field count of message facundomedica.rps.v1.QueryCountResponse is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_QueryCountResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "facundomedica.rps.v1.QueryCountResponse.count":
+		return protoreflect.ValueOfUint64(uint64(0))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: facundomedica.rps.v1.QueryCountResponse"))
+		}
+		panic(fmt.Errorf("message facundomedica.rps.v1.QueryCountResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_QueryCountResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in facundomedica.rps.v1.QueryCountResponse", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_QueryCountResponse) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_QueryCountResponse) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_QueryCountResponse) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_QueryCountResponse) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*QueryCountResponse)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		if x.Count != 0 {
+			n += 1 + runtime.Sov(uint64(x.Count))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*QueryCountResponse)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Count != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Count))
+			i--
+			dAtA[i] = 0x8
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*QueryCountResponse)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountResponse: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Counter", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Count", wireType)
 				}
-				x.Counter = 0
+				x.Count = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -800,7 +1586,7 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.Counter |= uint64(b&0x7F) << shift
+					x.Count |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -858,7 +1644,7 @@ func (x *QueryParamsRequest) ProtoReflect() protoreflect.Message {
 }
 
 func (x *QueryParamsRequest) slowProtoReflect() protoreflect.Message {
-	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[2]
+	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1216,7 +2002,7 @@ func (x *QueryParamsResponse) ProtoReflect() protoreflect.Message {
 }
 
 func (x *QueryParamsResponse) slowProtoReflect() protoreflect.Message {
-	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[3]
+	mi := &file_facundomedica_rps_v1_query_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1644,19 +2430,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// QueryCounterRequest is the request type for the Query/Counter RPC
-// method.
-type QueryCounterRequest struct {
+// QueryGamesRequest is the request type for the Query/Games RPC method.
+// TODO: add pagination
+type QueryGamesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
-	// address defines the address to query for the counter.
-	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
 }
 
-func (x *QueryCounterRequest) Reset() {
-	*x = QueryCounterRequest{}
+func (x *QueryGamesRequest) Reset() {
+	*x = QueryGamesRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1664,37 +2447,28 @@ func (x *QueryCounterRequest) Reset() {
 	}
 }
 
-func (x *QueryCounterRequest) String() string {
+func (x *QueryGamesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryCounterRequest) ProtoMessage() {}
+func (*QueryGamesRequest) ProtoMessage() {}
 
-// Deprecated: Use QueryCounterRequest.ProtoReflect.Descriptor instead.
-func (*QueryCounterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryGamesRequest.ProtoReflect.Descriptor instead.
+func (*QueryGamesRequest) Descriptor() ([]byte, []int) {
 	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *QueryCounterRequest) GetAddress() string {
-	if x != nil {
-		return x.Address
-	}
-	return ""
-}
-
-// QueryCounterResponse is the response type for the Query/Counter RPC
-// method.
-type QueryCounterResponse struct {
+// QueryGamesResponse is the response type for the Query/Games RPC method.
+type QueryGamesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// counter defines the current counter for the sender.
-	Counter uint64 `protobuf:"varint,1,opt,name=counter,proto3" json:"counter,omitempty"`
+	Games []*Game `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
 }
 
-func (x *QueryCounterResponse) Reset() {
-	*x = QueryCounterResponse{}
+func (x *QueryGamesResponse) Reset() {
+	*x = QueryGamesResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1702,20 +2476,86 @@ func (x *QueryCounterResponse) Reset() {
 	}
 }
 
-func (x *QueryCounterResponse) String() string {
+func (x *QueryGamesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryCounterResponse) ProtoMessage() {}
+func (*QueryGamesResponse) ProtoMessage() {}
 
-// Deprecated: Use QueryCounterResponse.ProtoReflect.Descriptor instead.
-func (*QueryCounterResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryGamesResponse.ProtoReflect.Descriptor instead.
+func (*QueryGamesResponse) Descriptor() ([]byte, []int) {
 	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *QueryCounterResponse) GetCounter() uint64 {
+func (x *QueryGamesResponse) GetGames() []*Game {
 	if x != nil {
-		return x.Counter
+		return x.Games
+	}
+	return nil
+}
+
+// QueryCounterRequest is the request type for the Query/Counter RPC
+// method.
+type QueryCountRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *QueryCountRequest) Reset() {
+	*x = QueryCountRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *QueryCountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryCountRequest) ProtoMessage() {}
+
+// Deprecated: Use QueryCountRequest.ProtoReflect.Descriptor instead.
+func (*QueryCountRequest) Descriptor() ([]byte, []int) {
+	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{2}
+}
+
+// QueryCounterResponse is the response type for the Query/Counter RPC
+// method.
+type QueryCountResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// count is the amount of games played so far.
+	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+}
+
+func (x *QueryCountResponse) Reset() {
+	*x = QueryCountResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *QueryCountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryCountResponse) ProtoMessage() {}
+
+// Deprecated: Use QueryCountResponse.ProtoReflect.Descriptor instead.
+func (*QueryCountResponse) Descriptor() ([]byte, []int) {
+	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *QueryCountResponse) GetCount() uint64 {
+	if x != nil {
+		return x.Count
 	}
 	return 0
 }
@@ -1730,7 +2570,7 @@ type QueryParamsRequest struct {
 func (x *QueryParamsRequest) Reset() {
 	*x = QueryParamsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[2]
+		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1744,7 +2584,7 @@ func (*QueryParamsRequest) ProtoMessage() {}
 
 // Deprecated: Use QueryParamsRequest.ProtoReflect.Descriptor instead.
 func (*QueryParamsRequest) Descriptor() ([]byte, []int) {
-	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{2}
+	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{4}
 }
 
 // QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -1760,7 +2600,7 @@ type QueryParamsResponse struct {
 func (x *QueryParamsResponse) Reset() {
 	*x = QueryParamsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[3]
+		mi := &file_facundomedica_rps_v1_query_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1774,7 +2614,7 @@ func (*QueryParamsResponse) ProtoMessage() {}
 
 // Deprecated: Use QueryParamsResponse.ProtoReflect.Descriptor instead.
 func (*QueryParamsResponse) Descriptor() ([]byte, []int) {
-	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{3}
+	return file_facundomedica_rps_v1_query_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *QueryParamsResponse) GetParams() *Params {
@@ -1798,53 +2638,65 @@ var file_facundomedica_rps_v1_query_proto_rawDesc = []byte{
 	0x2f, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2f, 0x76, 0x31, 0x2f, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x11, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2f, 0x61, 0x6d, 0x69,
 	0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x2f,
-	0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22,
-	0x30, 0x0a, 0x14, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65,
-	0x72, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x56, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79,
-	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3f,
-	0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c,
-	0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72,
-	0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde,
-	0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x32,
-	0xa6, 0x02, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x96, 0x01, 0x0a, 0x07, 0x43, 0x6f,
-	0x75, 0x6e, 0x74, 0x65, 0x72, 0x12, 0x29, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d,
-	0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x2a, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61,
-	0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75,
-	0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x34, 0x88, 0xe7,
-	0xb0, 0x2a, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x29, 0x12, 0x27, 0x2f, 0x66, 0x61, 0x63, 0x75,
+	0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x13,
+	0x0a, 0x11, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x22, 0x51, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x61, 0x6d, 0x65,
+	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3b, 0x0a, 0x05, 0x67, 0x61, 0x6d,
+	0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e,
+	0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e,
+	0x47, 0x61, 0x6d, 0x65, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52,
+	0x05, 0x67, 0x61, 0x6d, 0x65, 0x73, 0x22, 0x13, 0x0a, 0x11, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43,
+	0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x2a, 0x0a, 0x12, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x56, 0x0a,
+	0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3f, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65,
+	0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61,
+	0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x32, 0x9b, 0x03, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12,
+	0x84, 0x01, 0x0a, 0x05, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x27, 0x2e, 0x66, 0x61, 0x63, 0x75,
+	0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31,
+	0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x28, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69,
+	0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x47,
+	0x61, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x28, 0x88, 0xe7,
+	0xb0, 0x2a, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x12, 0x1b, 0x2f, 0x66, 0x61, 0x63, 0x75,
 	0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2f, 0x72, 0x70, 0x73, 0x2f, 0x76, 0x31,
-	0x2f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x2f, 0x7b, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x7d, 0x12, 0x83, 0x01, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x28, 0x2e,
-	0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70,
-	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64,
-	0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x22, 0x24, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x12, 0x1c, 0x2f, 0x66, 0x61, 0x63,
-	0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2f, 0x72, 0x70, 0x73, 0x2f, 0x76,
-	0x31, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0xd5, 0x01, 0x0a, 0x18, 0x63, 0x6f, 0x6d,
-	0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72,
-	0x70, 0x73, 0x2e, 0x76, 0x31, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74,
-	0x6f, 0x50, 0x01, 0x5a, 0x3b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2f, 0x72, 0x70,
-	0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64,
-	0x69, 0x63, 0x61, 0x2f, 0x72, 0x70, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x72, 0x70, 0x73, 0x76, 0x31,
-	0xa2, 0x02, 0x03, 0x46, 0x52, 0x58, 0xaa, 0x02, 0x14, 0x46, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f,
-	0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x52, 0x70, 0x73, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x14,
-	0x46, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x5c, 0x52, 0x70,
-	0x73, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x20, 0x46, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65,
-	0x64, 0x69, 0x63, 0x61, 0x5c, 0x52, 0x70, 0x73, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d,
-	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x16, 0x46, 0x61, 0x63, 0x75, 0x6e, 0x64,
-	0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x3a, 0x3a, 0x52, 0x70, 0x73, 0x3a, 0x3a, 0x56, 0x31,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x2f, 0x67, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x84, 0x01, 0x0a, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74,
+	0x12, 0x27, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61,
+	0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75,
+	0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x66, 0x61, 0x63, 0x75,
+	0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31,
+	0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x28, 0x88, 0xe7, 0xb0, 0x2a, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d,
+	0x12, 0x1b, 0x2f, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61,
+	0x2f, 0x72, 0x70, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x83, 0x01,
+	0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x28, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e,
+	0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e,
+	0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x29, 0x2e, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69,
+	0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x24, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x12, 0x1c, 0x2f, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d,
+	0x65, 0x64, 0x69, 0x63, 0x61, 0x2f, 0x72, 0x70, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x70, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x42, 0xd5, 0x01, 0x0a, 0x18, 0x63, 0x6f, 0x6d, 0x2e, 0x66, 0x61, 0x63, 0x75,
+	0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2e, 0x72, 0x70, 0x73, 0x2e, 0x76, 0x31,
+	0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x3b,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x66, 0x61, 0x63, 0x75, 0x6e,
+	0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2f, 0x72, 0x70, 0x73, 0x2f, 0x61, 0x70, 0x69,
+	0x2f, 0x66, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x2f, 0x72,
+	0x70, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x72, 0x70, 0x73, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x46, 0x52,
+	0x58, 0xaa, 0x02, 0x14, 0x46, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63,
+	0x61, 0x2e, 0x52, 0x70, 0x73, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x14, 0x46, 0x61, 0x63, 0x75, 0x6e,
+	0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x5c, 0x52, 0x70, 0x73, 0x5c, 0x56, 0x31, 0xe2,
+	0x02, 0x20, 0x46, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69, 0x63, 0x61, 0x5c,
+	0x52, 0x70, 0x73, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
+	0x74, 0x61, 0xea, 0x02, 0x16, 0x46, 0x61, 0x63, 0x75, 0x6e, 0x64, 0x6f, 0x6d, 0x65, 0x64, 0x69,
+	0x63, 0x61, 0x3a, 0x3a, 0x52, 0x70, 0x73, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1859,25 +2711,31 @@ func file_facundomedica_rps_v1_query_proto_rawDescGZIP() []byte {
 	return file_facundomedica_rps_v1_query_proto_rawDescData
 }
 
-var file_facundomedica_rps_v1_query_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_facundomedica_rps_v1_query_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_facundomedica_rps_v1_query_proto_goTypes = []interface{}{
-	(*QueryCounterRequest)(nil),  // 0: facundomedica.rps.v1.QueryCounterRequest
-	(*QueryCounterResponse)(nil), // 1: facundomedica.rps.v1.QueryCounterResponse
-	(*QueryParamsRequest)(nil),   // 2: facundomedica.rps.v1.QueryParamsRequest
-	(*QueryParamsResponse)(nil),  // 3: facundomedica.rps.v1.QueryParamsResponse
-	(*Params)(nil),               // 4: facundomedica.rps.v1.Params
+	(*QueryGamesRequest)(nil),   // 0: facundomedica.rps.v1.QueryGamesRequest
+	(*QueryGamesResponse)(nil),  // 1: facundomedica.rps.v1.QueryGamesResponse
+	(*QueryCountRequest)(nil),   // 2: facundomedica.rps.v1.QueryCountRequest
+	(*QueryCountResponse)(nil),  // 3: facundomedica.rps.v1.QueryCountResponse
+	(*QueryParamsRequest)(nil),  // 4: facundomedica.rps.v1.QueryParamsRequest
+	(*QueryParamsResponse)(nil), // 5: facundomedica.rps.v1.QueryParamsResponse
+	(*Game)(nil),                // 6: facundomedica.rps.v1.Game
+	(*Params)(nil),              // 7: facundomedica.rps.v1.Params
 }
 var file_facundomedica_rps_v1_query_proto_depIdxs = []int32{
-	4, // 0: facundomedica.rps.v1.QueryParamsResponse.params:type_name -> facundomedica.rps.v1.Params
-	0, // 1: facundomedica.rps.v1.Query.Counter:input_type -> facundomedica.rps.v1.QueryCounterRequest
-	2, // 2: facundomedica.rps.v1.Query.Params:input_type -> facundomedica.rps.v1.QueryParamsRequest
-	1, // 3: facundomedica.rps.v1.Query.Counter:output_type -> facundomedica.rps.v1.QueryCounterResponse
-	3, // 4: facundomedica.rps.v1.Query.Params:output_type -> facundomedica.rps.v1.QueryParamsResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	6, // 0: facundomedica.rps.v1.QueryGamesResponse.games:type_name -> facundomedica.rps.v1.Game
+	7, // 1: facundomedica.rps.v1.QueryParamsResponse.params:type_name -> facundomedica.rps.v1.Params
+	0, // 2: facundomedica.rps.v1.Query.Games:input_type -> facundomedica.rps.v1.QueryGamesRequest
+	2, // 3: facundomedica.rps.v1.Query.Count:input_type -> facundomedica.rps.v1.QueryCountRequest
+	4, // 4: facundomedica.rps.v1.Query.Params:input_type -> facundomedica.rps.v1.QueryParamsRequest
+	1, // 5: facundomedica.rps.v1.Query.Games:output_type -> facundomedica.rps.v1.QueryGamesResponse
+	3, // 6: facundomedica.rps.v1.Query.Count:output_type -> facundomedica.rps.v1.QueryCountResponse
+	5, // 7: facundomedica.rps.v1.Query.Params:output_type -> facundomedica.rps.v1.QueryParamsResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_facundomedica_rps_v1_query_proto_init() }
@@ -1888,7 +2746,7 @@ func file_facundomedica_rps_v1_query_proto_init() {
 	file_facundomedica_rps_v1_types_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_facundomedica_rps_v1_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryCounterRequest); i {
+			switch v := v.(*QueryGamesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1900,7 +2758,7 @@ func file_facundomedica_rps_v1_query_proto_init() {
 			}
 		}
 		file_facundomedica_rps_v1_query_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryCounterResponse); i {
+			switch v := v.(*QueryGamesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1912,7 +2770,7 @@ func file_facundomedica_rps_v1_query_proto_init() {
 			}
 		}
 		file_facundomedica_rps_v1_query_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryParamsRequest); i {
+			switch v := v.(*QueryCountRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1924,6 +2782,30 @@ func file_facundomedica_rps_v1_query_proto_init() {
 			}
 		}
 		file_facundomedica_rps_v1_query_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*QueryCountResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_facundomedica_rps_v1_query_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*QueryParamsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_facundomedica_rps_v1_query_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryParamsResponse); i {
 			case 0:
 				return &v.state
@@ -1942,7 +2824,7 @@ func file_facundomedica_rps_v1_query_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_facundomedica_rps_v1_query_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
