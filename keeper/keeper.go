@@ -7,6 +7,7 @@ import (
 	"cosmossdk.io/core/address"
 	"cosmossdk.io/core/appmodule"
 	storetypes "cosmossdk.io/core/store"
+
 	"github.com/cosmos/cosmos-sdk/codec"
 
 	"github.com/facundomedica/rps"
@@ -21,9 +22,12 @@ type Keeper struct {
 	authority string
 
 	// state management
-	Schema  collections.Schema
-	Params  collections.Item[rps.Params]
-	Counter collections.Map[string, uint64]
+	Schema      collections.Schema
+	Params      collections.Item[rps.Params]
+	GameID      collections.Sequence
+	Games       collections.Map[uint64, rps.Game]
+	MoveCommits collections.Map[collections.Pair[uint64, []byte], rps.MoveCommit]
+	MoveReveals collections.Map[collections.Pair[uint64, []byte], rps.MoveReveal]
 }
 
 // NewKeeper creates a new Keeper instance
@@ -38,7 +42,10 @@ func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService s
 		addressCodec: addressCodec,
 		authority:    authority,
 		Params:       collections.NewItem(sb, rps.ParamsKey, "params", codec.CollValue[rps.Params](cdc)),
-		Counter:      collections.NewMap(sb, rps.CounterKey, "counter", collections.StringKey, collections.Uint64Value),
+		GameID:       collections.NewSequence(sb, rps.GameIDKey, "game_id"),
+		Games:        collections.NewMap(sb, rps.GamesKey, "games", collections.Uint64Key, codec.CollValue[rps.Game](cdc)),
+		MoveCommits:  collections.NewMap(sb, rps.MoveCommitKey, "move_commits", collections.PairKeyCodec(collections.Uint64Key, collections.BytesKey), codec.CollValue[rps.MoveCommit](cdc)),
+		MoveReveals:  collections.NewMap(sb, rps.MoveRevealKey, "move_reveals", collections.PairKeyCodec(collections.Uint64Key, collections.BytesKey), codec.CollValue[rps.MoveReveal](cdc)),
 	}
 
 	schema, err := sb.Build()
