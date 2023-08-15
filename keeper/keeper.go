@@ -83,7 +83,6 @@ func (k Keeper) EndBlocker(ctx context.Context) error {
 
 	gamesToDelete := []uint64{}
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	fmt.Println("ACACACA")
 	err := k.Games.Walk(ctx, nil, func(id uint64, game rps.Game) (bool, error) {
 		now := sdkCtx.BlockTime()
 
@@ -102,7 +101,6 @@ func (k Keeper) EndBlocker(ctx context.Context) error {
 		if err != nil {
 			return false, err
 		}
-		fmt.Println("ACACACA 22222")
 		// if the game has less than 2 players and the commit timeout has passed, delete the game and refund the entry fee
 		if len(playersCommited) < 2 && now.After(game.CommitTimeout) {
 			gamesToDelete = append(gamesToDelete, id)
@@ -117,7 +115,6 @@ func (k Keeper) EndBlocker(ctx context.Context) error {
 			return false, nil
 		}
 
-		fmt.Println("ACACACA 33333")
 		// now let's check for reveals
 		playersRevealed := [][]byte{}
 		reveals := []rps.MoveReveal{}
@@ -134,8 +131,6 @@ func (k Keeper) EndBlocker(ctx context.Context) error {
 			return false, err
 		}
 
-		fmt.Println("ACACACA 4444")
-
 		// revealTimedOut := now.After(game.RevealTimeout)
 		// if the reveal timeout hasn't passed and less than 2 players revealed, let's wait
 		if len(playersRevealed) < 2 && now.Before(game.RevealTimeout) {
@@ -147,8 +142,6 @@ func (k Keeper) EndBlocker(ctx context.Context) error {
 
 		// given that 2 players committed, the prize is the entry fee times 2
 		prize := sdk.NewCoins(sdk.NewCoin(game.EntryFee.Denom, game.EntryFee.Amount.MulRaw(2)))
-
-		fmt.Println("ACACACA 5555")
 
 		// now either 2 players revealed or the reveal timeout has passed
 		// if a single player revealed, they win by default
