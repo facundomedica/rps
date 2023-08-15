@@ -5,13 +5,14 @@ import (
 
 	"cosmossdk.io/core/genesis"
 	storetypes "cosmossdk.io/store/types"
+	"github.com/stretchr/testify/require"
+
 	addresscodec "github.com/cosmos/cosmos-sdk/codec/address"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
-	"github.com/stretchr/testify/require"
 
 	"github.com/facundomedica/rps"
 	"github.com/facundomedica/rps/keeper"
@@ -33,9 +34,9 @@ func initFixture(t *testing.T) *testFixture {
 	storeService := runtime.NewKVStoreService(key)
 	addrs := simtestutil.CreateIncrementalAccounts(3)
 
-	k := keeper.NewKeeper(encCfg.Codec, addresscodec.NewBech32Codec("cosmos"), storeService, addrs[0].String())
+	k := keeper.NewKeeper(encCfg.Codec, addresscodec.NewBech32Codec("cosmos"), storeService, nil, addrs[0].String())
 
-	source, err := genesis.SourceFromRawJSON([]byte(`{"counter":[],"params":[]}`))
+	source, err := genesis.SourceFromRawJSON([]byte(`{"game_id":[],"games":[],"move_commits":[],"move_reveals":[],"params":[{"key":"item","value":{"commit_timeout":"60","reveal_timeout":"60"}}]}`))
 	require.NoError(t, err)
 
 	err = k.Schema.InitGenesis(testCtx.Ctx, source)

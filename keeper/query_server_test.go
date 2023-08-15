@@ -13,7 +13,7 @@ func TestQueryParams(t *testing.T) {
 
 	resp, err := f.queryServer.Params(f.ctx, &rps.QueryParamsRequest{})
 	require.NoError(err)
-	require.Equal(rps.Params{}, resp.Params)
+	require.Equal(rps.Params{CommitTimeout: 60, RevealTimeout: 60}, resp.Params)
 }
 
 // func TestQueryCounter(t *testing.T) {

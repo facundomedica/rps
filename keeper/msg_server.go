@@ -36,6 +36,11 @@ func (ms msgServer) NewGame(ctx context.Context, msg *rps.MsgNewGame) (*rps.MsgN
 		return nil, fmt.Errorf("invalid player address: %w", err)
 	}
 
+	err = ms.k.bankKeeper.SendCoinsFromAccountToModule(ctx, playerAddr, rps.ModuleName, sdk.NewCoins(msg.EntryFee))
+	if err != nil {
+		return nil, err
+	}
+
 	// create game
 	gid, err := ms.k.GameID.Next(ctx)
 	if err != nil {
@@ -97,6 +102,11 @@ func (ms msgServer) CommitMove(ctx context.Context, msg *rps.MsgCommitMove) (*rp
 
 	if alreadyInGame {
 		return nil, errors.New("player already in game")
+	}
+
+	err = ms.k.bankKeeper.SendCoinsFromAccountToModule(ctx, playerAddr, rps.ModuleName, sdk.NewCoins(game.EntryFee))
+	if err != nil {
+		return nil, err
 	}
 
 	// check if the game is full

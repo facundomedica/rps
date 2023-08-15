@@ -22,7 +22,7 @@ func TestDefaultGenesis(t *testing.T) {
 	err = json.Compact(buf, result)
 	require.NoError(t, err)
 
-	require.Equal(t, `{"counter":[],"params":[]}`, buf.String())
+	require.Equal(t, `{"game_id":[],"games":[],"move_commits":[],"move_reveals":[],"params":[]}`, buf.String())
 }
 
 // func TestExportGenesis(t *testing.T) {

@@ -11,6 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 
 	"github.com/facundomedica/rps"
+	expectedkeepers "github.com/facundomedica/rps/expected_keepers"
 )
 
 type Keeper struct {
@@ -28,10 +29,13 @@ type Keeper struct {
 	Games       collections.Map[uint64, rps.Game]
 	MoveCommits collections.Map[collections.Pair[uint64, []byte], rps.MoveCommit]
 	MoveReveals collections.Map[collections.Pair[uint64, []byte], rps.MoveReveal]
+
+	// other keepers
+	bankKeeper expectedkeepers.BankKeeper
 }
 
 // NewKeeper creates a new Keeper instance
-func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService storetypes.KVStoreService, authority string) Keeper {
+func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService storetypes.KVStoreService, bk expectedkeepers.BankKeeper, authority string) Keeper {
 	if _, err := addressCodec.StringToBytes(authority); err != nil {
 		panic(fmt.Errorf("invalid authority address: %w", err))
 	}
@@ -54,6 +58,7 @@ func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService s
 	}
 
 	k.Schema = schema
+	k.bankKeeper = bk
 
 	return k
 }
