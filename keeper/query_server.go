@@ -23,13 +23,29 @@ type queryServer struct {
 }
 
 // Count implements rps.QueryServer.
-func (queryServer) Count(context.Context, *rps.QueryCountRequest) (*rps.QueryCountResponse, error) {
-	panic("unimplemented")
+func (qs queryServer) Count(ctx context.Context, _ *rps.QueryCountRequest) (*rps.QueryCountResponse, error) {
+	count, err := qs.k.GameID.Next(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &rps.QueryCountResponse{Count: count}, nil
 }
 
 // Games implements rps.QueryServer.
-func (queryServer) Games(context.Context, *rps.QueryGamesRequest) (*rps.QueryGamesResponse, error) {
-	panic("unimplemented")
+func (qs queryServer) Games(ctx context.Context, _ *rps.QueryGamesRequest) (*rps.QueryGamesResponse, error) {
+	res := &rps.QueryGamesResponse{Games: []rps.Game{}}
+
+	err := qs.k.Games.Walk(ctx, nil, func(key uint64, game rps.Game) (bool, error) {
+		game.Id = key
+		res.Games = append(res.Games, game)
+		return false, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }
 
 // Params defines the handler for the Query/Params RPC method.
