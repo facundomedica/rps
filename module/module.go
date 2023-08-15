@@ -30,6 +30,7 @@ const ConsensusVersion = 1
 
 type AppModule struct {
 	appmodule.HasGenesis
+	appmodule.HasEndBlocker
 
 	keeper keeper.Keeper
 }
@@ -80,6 +81,10 @@ func (am AppModule) RegisterServices(cfg module.Configurator) {
 	// if err := cfg.RegisterMigration(rps.ModuleName, 1, m.Migrate1to2); err != nil {
 	// 	panic(fmt.Sprintf("failed to migrate x/%s from version 1 to 2: %v", rps.ModuleName, err))
 	// }
+}
+
+func (am AppModule) EndBlock(ctx context.Context) error {
+	return am.keeper.EndBlocker(ctx)
 }
 
 func (AppModule) GetTxCmd() *cobra.Command {
