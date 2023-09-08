@@ -1,4 +1,4 @@
-# `{Module Name}`
+# `RPS`
 
 Overview of the module.
 
